@@ -8,3 +8,5 @@ if [[ ! -v BASH_ROOT ]];then
 	return 1
 fi
 
+source ${BASH_ROOT}/bash.sh
+
