@@ -19,5 +19,6 @@ else
 fi
 
 # Show command
+alias env='env | sort -f'
 alias less='less -gMNRqW'
 
