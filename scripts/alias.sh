@@ -6,6 +6,9 @@ alias version='echo "bash versions: ${BASH_VERSION}"'
 alias rm='rm -Iv --one-file-system'
 alias mv='mv -bv --suffix=".bak"'
 alias cp='cp -bv --suffix=".bak"'
+alias mkdirs='mkdir -p'
+alias link='ln -bv --suffix=".bak"'
+alias symlink='link --symbolic --no-dereference'
 
 # Judge to add color
 if [[ -x /usr/bin/dircolors ]]; then
