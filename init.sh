@@ -15,3 +15,5 @@ INPUTRC="${BASH_ROOT}/readline.inputrc"
 source "${BASH_ROOT}/bash.sh"
 source "${BASH_ROOT}/scripts/alias.sh"
 source "${BASH_ROOT}/scripts/prompt.sh"
+source "${BASH_ROOT}/scripts/completion.sh"
+
