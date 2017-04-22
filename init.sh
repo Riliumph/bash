@@ -9,8 +9,12 @@ if [[ ! -v BASH_ROOT ]];then
 fi
 
 ### readline config
-INPUTRC=${BASH_ROOT}/readline.inputrc
+INPUTRC="${BASH_ROOT}/readline.inputrc"
 
 ### Bash options
-source ${BASH_ROOT}/bash.sh
+source "${BASH_ROOT}/bash.sh"
+source "${BASH_ROOT}/scripts/alias.sh"
+source "${BASH_ROOT}/scripts/prompt.sh"
+source "${BASH_ROOT}/scripts/completion.sh"
 
+source "${BASH_ROOT}/functions/cd.sh"
