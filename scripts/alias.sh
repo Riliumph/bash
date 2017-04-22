@@ -18,3 +18,6 @@ else
   alias ll='clear && la -l --color=auto --human-readable --time-style="+%y-%m-%d %H:%M:%S"'
 fi
 
+# Show command
+alias less='less -gMNRqW'
+
