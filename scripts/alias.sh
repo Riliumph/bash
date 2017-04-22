@@ -22,6 +22,9 @@ else
 fi
 
 # Show command
+alias df='df -h --inode'
+alias du='du -h --all'
+alias ps='ps --sort=start_time'
 alias env='env | sort -f'
 alias less='less -gMNRqW'
 
