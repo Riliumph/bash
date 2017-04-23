@@ -1,3 +1,22 @@
+# Check environment value
+if [[ ! -v CACHE_DIR_FOR_BASH ]]; then
+  # If CACHE_DIR_FOR_BASH is undefined,
+  # set default path,
+  export CACHE_DIR_FOR_BASH=${BASH_ROOT}/cache
+fi
+
+# Check log directory existance
+if [[ ! -d CACHE_DIR_FOR_BASH ]];then
+  mkdir -p ${CACHE_DIR_FOR_BASH}
+fi
+
+CD_HISTORY_FOR_BASH=${CACHE_DIR_FOR_BASH}/cd_history.log
+
+# Check log file existance
+if [[ ! -f CD_HISTORY_FOR_BASH ]]; then
+  touch "${CD_HISTORY_FOR_BASH}"
+fi
+
 ###
 # Cutom cd Command
 #
@@ -22,6 +41,14 @@ custom_cdls()
       path=$(find ./ -maxdepth 1 -type d | eval $asc_order | peco)
       ;;
     1)path=$1
+      if which peco &> /dev/null; then
+        if [[ ${path} == '-' ]];then
+          local trim_duplication='awk '\''!dictionaty[$0]++'\'''
+          path=$(cat ${CD_HISTORY_FOR_BASH} \
+                 | eval ${trim_duplication} \
+                 | peco) # Cannot use --query option
+        fi
+      fi
       ;;
     *)echo 'Too many args for cd command'
       return 1
@@ -32,6 +59,10 @@ custom_cdls()
     echo "Missing path: ${path}"
     return 1
   fi
+
+  # Log path history and Convert relative path to absolute path
+  readlink -f ${path} >> ${CD_HISTORY_FOR_BASH}
+
   # \cd => builtin cd
   \cd ${path} && clear && ls
 }
