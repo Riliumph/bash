@@ -4,6 +4,7 @@
 # @param $1 destination directory
 # Args num 0:
 #    Show error and return
+#    but if you has peco, select from current directory
 # Args num 1:
 #    Execute cdls commands
 # Args "-" ( optional args num 1)
@@ -13,8 +14,12 @@ custom_cdls()
   local -r argc=$#
   local path
   case ${argc} in
-    0)echo 'Missing args';
-      return 1
+    0)if ! which peco &> /dev/null; then
+        echo 'Missing args';
+        return 1;
+      fi
+      local asc_order='sort -f'
+      path=$(find ./ -maxdepth 1 -type d | eval $asc_order | peco)
       ;;
     1)path=$1
       ;;
