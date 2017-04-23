@@ -39,3 +39,9 @@ alias env='env | sort -f'
 alias less='less -gMNRqW'
 
 alias show_path='echo ${PATH} | replace : \\n'
+
+# Etc
+alias unpatch='patch -R'
+alias targz='tar cfvz'
+alias untargz='tar xfvz'
+
