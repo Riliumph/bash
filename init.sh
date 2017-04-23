@@ -13,6 +13,7 @@ INPUTRC="${BASH_ROOT}/readline.inputrc"
 
 ### Function definition
 source "${BASH_ROOT}/functions/date_time.sh"
+source "${BASH_ROOT}/functions/seds.sh"
 
 ### Bash options
 source "${BASH_ROOT}/bash.sh"

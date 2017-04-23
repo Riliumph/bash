@@ -28,3 +28,4 @@ alias ps='ps --sort=start_time'
 alias env='env | sort -f'
 alias less='less -gMNRqW'
 
+alias show_path='echo ${PATH} | replace : \\n'
