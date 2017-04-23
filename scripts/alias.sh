@@ -26,6 +26,9 @@ else
 fi
 
 # Show command
+if which htop &> /dev/null; then
+  alias top='htop'
+fi
 alias df='df -h --inode'
 alias du='du -h --all'
 alias ps='ps --sort=start_time'
