@@ -23,4 +23,6 @@ source "${BASH_ROOT}/scripts/completion.sh"
 
 ### Use alias
 source "${BASH_ROOT}/functions/cd.sh"
-
+if which peco &> /dev/null; then
+  source "${BASH_ROOT}/functions/peco_history.sh"
+fi
