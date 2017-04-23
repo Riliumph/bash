@@ -11,10 +11,16 @@ fi
 ### readline config
 INPUTRC="${BASH_ROOT}/readline.inputrc"
 
+### Function definition
+source "${BASH_ROOT}/functions/date_time.sh"
+source "${BASH_ROOT}/functions/seds.sh"
+
 ### Bash options
 source "${BASH_ROOT}/bash.sh"
 source "${BASH_ROOT}/scripts/alias.sh"
 source "${BASH_ROOT}/scripts/prompt.sh"
 source "${BASH_ROOT}/scripts/completion.sh"
 
+### Use alias
 source "${BASH_ROOT}/functions/cd.sh"
+
