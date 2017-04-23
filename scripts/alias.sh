@@ -3,7 +3,11 @@ alias refresh='source $HOME/.bashrc && echo "Refresh Bash"'
 alias version='echo "bash versions: ${BASH_VERSION}"'
 
 # File & Directory operation
-alias rm='rm -Iv --one-file-system'
+if which trash &> /dev/null; then
+  alias rm='trash-put'
+else
+  alias rm='rm -Iv --one-file-system'
+fi
 alias mv='mv -bv --suffix=".bak"'
 alias cp='cp -bv --suffix=".bak"'
 alias mkdirs='mkdir -p'
