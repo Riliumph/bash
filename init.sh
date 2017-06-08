@@ -17,6 +17,7 @@ source "${BASH_ROOT}/functions/seds.sh"
 
 ### Bash options
 source "${BASH_ROOT}/bash.sh"
+source "${BASH_ROOT}/scripts/env.sh"
 source "${BASH_ROOT}/scripts/alias.sh"
 source "${BASH_ROOT}/scripts/prompt.sh"
 source "${BASH_ROOT}/scripts/completion.sh"

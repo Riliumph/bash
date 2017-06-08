@@ -21,5 +21,5 @@ export HISTIGNORE=?:??:???:????:${HISTIGNORE}
 # Specific command names
 export HISTIGNORE=cd*:${HISTIGNORE}
 export HISTIGNORE=which*:${HISTIGNORE}
-export HISTIGNORE=history:${HISTIGNORE}
+export HISTIGNORE=history*:${HISTIGNORE}
 
