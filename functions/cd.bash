@@ -69,3 +69,27 @@ custom_cdls()
 
 alias cd='custom_cdls'
 
+###
+# _clean_history
+#
+#
+_clean_dir_history()
+{
+  local trim_duplication='awk '\''!dictionaty[$0]++'\'''
+  local reverse_order='tac'
+  # Read history file
+  uniq_ary=($(cat ${CD_HISTORY_FOR_BASH} \
+           | eval $reverse_order \
+           | eval $trim_duplication \
+           | eval $reverse_order))
+  \cp $CD_HISTORY_FOR_BASH $CD_HISTORY_FOR_BASH.bak &> /dev/null
+  :> ${CD_HISTORY_FOR_BASH} # truncate file
+  for line in "${uniq_ary[@]}"; do
+    if [[ -e $line ]]; then
+      echo $line >> ${CD_HISTORY_FOR_BASH}
+    fi
+  done
+}
+
+_clean_dir_history
+
