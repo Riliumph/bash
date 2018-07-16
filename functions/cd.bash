@@ -44,7 +44,9 @@ custom_cdls()
       if which peco &> /dev/null; then
         if [[ ${path} == '-' ]];then
           local trim_duplication='awk '\''!dictionaty[$0]++'\'''
+          local reverse_order='tac'
           path=$(cat ${CD_HISTORY_FOR_BASH} \
+                 | eval ${reverse_order} \
                  | eval ${trim_duplication} \
                  | peco) # Cannot use --query option
         fi
