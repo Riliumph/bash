@@ -62,11 +62,11 @@ custom_cdls()
     return 1
   fi
 
-  # Log path history and Convert relative path to absolute path
-  readlink -f ${path} >> ${CD_HISTORY_FOR_BASH}
-
   # \cd => builtin cd
   \cd ${path} && clear && ls
+
+  # Log path history and Convert relative path to absolute path
+  pwd >> ${CD_HISTORY_FOR_BASH}
 }
 
 alias cd='custom_cdls'
