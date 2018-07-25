@@ -13,7 +13,6 @@ share_history()
 
 PROMPT_COMMAND='share_history'
 shopt -u histappend  # Unset shell option
-export HISTSIZE=9999
 export HISTCONTROL=ignoreboth   # ex) ignoredups,ignorespace,erasedups
 ### Ignore commands
 # command name with 4 or fewer characters
@@ -21,5 +20,5 @@ export HISTIGNORE=?:??:???:????:${HISTIGNORE}
 # Specific command names
 export HISTIGNORE=cd*:${HISTIGNORE}
 export HISTIGNORE=which*:${HISTIGNORE}
-export HISTIGNORE=history:${HISTIGNORE}
+export HISTIGNORE=history*:${HISTIGNORE}
 

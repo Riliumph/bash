@@ -46,4 +46,5 @@ GetPromptString()
 }
 
 PS1=$(GetPromptString)
+export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 
