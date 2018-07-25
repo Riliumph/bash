@@ -16,24 +16,24 @@ shopt -s extglob
 shopt -s globstar
 
 ### readline config
-INPUTRC="${BASH_ROOT}/readline.inputrc"
+INPUTRC="$BASH_ROOT/readline.inputrc"
 
 ### Function definition
-source "${BASH_ROOT}/functions/date_time.bash"
-source "${BASH_ROOT}/functions/seds.bash"
+source "$BASH_ROOT/functions/date_time.bash"
+source "$BASH_ROOT/functions/seds.bash"
 
 ### Bash options
-source "${BASH_ROOT}/scripts/env.bash"
-source "${BASH_ROOT}/scripts/alias.bash"
-source "${BASH_ROOT}/scripts/prompt.bash"
-source "${BASH_ROOT}/scripts/completion.bash"
+source "$BASH_ROOT/scripts/env.bash"
+source "$BASH_ROOT/scripts/alias.bash"
+source "$BASH_ROOT/scripts/prompt.bash"
+source "$BASH_ROOT/scripts/completion.bash"
 
 ### Use alias
-source "${BASH_ROOT}/functions/cd.bash"
+source "$BASH_ROOT/functions/cd.bash"
 if which peco &> /dev/null; then
-  source "${BASH_ROOT}/functions/peco_history.bash"
+  source "$BASH_ROOT/functions/peco_history.bash"
 fi
 
 ### Use other setting
-source "${BASH_ROOT}/scripts/bind.bash"
+source "$BASH_ROOT/scripts/bind.bash"
 
