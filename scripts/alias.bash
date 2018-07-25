@@ -16,14 +16,14 @@ alias symlink='link --symbolic --no-dereference'
 
 # Judge to add color
 if [[ -x /usr/bin/dircolors ]]; then
-  alias ls='ls -v --color=auto --classify --format=across --group-directories-first --sort=extension'
+  alias ls='ls -v --color=auto --classify --format=across --group-directories-first'
   alias la='ls --almost-all --ignore-backups'
   alias ll='clear && la -l --color=auto --human-readable --time-style="+%y-%m-%d %H:%M:%S"'
   alias grep='grep --color=auto'
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 else
-  alias ls='ls -v --classify --format=across --group-directories-first --sort=extension'
+  alias ls='ls -v --classify --format=across --group-directories-first'
   alias la='ls --almost-all --ignore-backups'
   alias ll='clear && la -l --color=auto --human-readable --time-style="+%y-%m-%d %H:%M:%S"'
 fi
