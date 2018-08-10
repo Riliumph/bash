@@ -33,13 +33,10 @@ custom_cdls()
   local -r argc=$#
   local destination=$*
   case ${argc} in
-    0)if ! which peco &> /dev/null; then
-        # Don't move $OLD_PWD
-        echo 'Missing args';
-        return 1;
+    0)if which peco &> /dev/null; then
+        local asc_order='sort -f'
+        destination=$(find ./ -maxdepth 1 -type d | eval $asc_order | peco)
       fi
-      local asc_order='sort -f'
-      destination=$(find ./ -maxdepth 1 -type d | eval $asc_order | peco)
       ;;
     1)destination=$1
       if which peco &> /dev/null; then
@@ -54,6 +51,12 @@ custom_cdls()
       fi
       ;;
   esac
+  # Don't move $HOME
+  if [ -z $destination ]; then
+    echo 'Missing args';
+    return 1;
+  fi
+
   # \cd => builtin cd
   \cd ${destination}
   if [ $? -ne 0 ]; then
