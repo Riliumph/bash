@@ -3,45 +3,54 @@ alias refresh='source $HOME/.bashrc && echo "Refresh Bash"'
 alias version='echo "bash versions: ${BASH_VERSION}"'
 
 # File & Directory operation
+alias rm='rm -v'
+alias mv='mv -v'
+alias cp='cp -v'
+if [ $OS = 'Linux' ]; then
+  alias rm='rm -I --one-file-system'
+  alias mv='mv -b --suffix=".bak"'
+  alias cp='cp -b --suffix=".bak"'
+fi
 if which trash &> /dev/null; then
   alias rm='trash-put'
-else
-  alias rm='rm -Iv --one-file-system'
 fi
-alias mv='mv -bv --suffix=".bak"'
-alias cp='cp -bv --suffix=".bak"'
 alias mkdirs='mkdir -p'
-alias link='ln -bv --suffix=".bak"'
-alias symlink='link --symbolic --no-dereference'
 
-# Judge to add color
-if [[ -x /usr/bin/dircolors ]]; then
-  alias ls='ls -v --color=auto --classify --format=across --group-directories-first'
-  alias la='ls --almost-all --ignore-backups'
-  alias ll='clear && la -l --color=auto --human-readable --time-style="+%y-%m-%d %H:%M:%S"'
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
-else
-  alias ls='ls -v --classify --format=across --group-directories-first'
-  alias la='ls --almost-all --ignore-backups'
-  alias ll='clear && la -l --color=auto --human-readable --time-style="+%y-%m-%d %H:%M:%S"'
+alias ln='ln -v'
+alias link='ln'
+alias symlink='ln -s'
+if [ $OS = 'Linux' ]; then
+  alias link='ln -b --suffix=".bak"'
+  alias symlink='link --no-dereference'
+fi
+
+# List segments
+alias ls='ls -hFx'
+if [ $OS = 'Linux' ]; then
+  alias ls='ls -v --color=auto --group-directories-first'
+  alias la='ls --almost-all'
+  alias ll='clear && la -l --time-style="+%y-%m-%d %H:%M:%S"'
+elif [ $OS = 'Linux' ]; then
+  alias ls='ls -G'
+  alias la='ls -A'
+  alias ll='clear && la -l | sort -V'
 fi
 
 # Show command
 if which htop &> /dev/null; then
   alias top='htop'
 fi
-alias df='df -h --inode'
-alias du='du -h --all'
-alias ps='ps --sort=start_time'
-alias env='env | sort -f'
+if [ $OS = 'Linux' ]; then
+  alias ps='ps --sort=start_time'
+fi
+alias df='df -h'
+alias du='du -h'
+alias printenv='printenv | sort -f'
 alias less='less -gMNRqW'
 
-alias show_path='echo ${PATH} | replace : \\n'
+alias path='echo ${PATH} | replace : \\n'
 
 # Etc
 alias unpatch='patch -R'
 alias targz='tar cfvz'
 alias untargz='tar xfvz'
-
