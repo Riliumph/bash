@@ -42,7 +42,12 @@ custom_cdls()
       if which peco &> /dev/null; then
         if [[ ${destination} == '-' ]];then
           local trim_duplication='awk '\''!dictionaty[$0]++'\'''
-          local reverse_order='tac'
+          local reverse_order
+          if which tac &> /dev/null; then
+            reverse_order='tac'
+          else
+            reverse_order='tail -r'
+          fi
           destination=$(\cat ${CD_HISTORY_FOR_BASH} \
                  | eval ${reverse_order} \
                  | eval ${trim_duplication} \
@@ -77,7 +82,12 @@ alias cd='custom_cdls'
 _clean_dir_history()
 {
   local trim_duplication='awk '\''!dictionaty[$0]++'\'''
-  local reverse_order='tac'
+  local reverse_order
+  if which tac &> /dev/null; then
+      reverse_order='tac'
+  else
+      reverse_order='tail -r'
+  fi
   # Read history file
   uniq_ary=($(cat ${CD_HISTORY_FOR_BASH} \
            | eval $reverse_order \
