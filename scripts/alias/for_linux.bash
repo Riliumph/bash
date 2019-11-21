@@ -39,7 +39,7 @@ alias ps='ps --sort=start_time'
 alias env='env | sort -f'
 alias less='less -gMNRqW'
 
-alias path='echo ${PATH} | replace : \\n'
+alias path='echo ${PATH} | tr : \\n'
 
 # Etc
 alias unpatch='patch -R'
