@@ -9,18 +9,16 @@
 # 4.Pipe to peco
 peco_history()
 {
-  local descending_order
-  if which sort &> /dev/null; then
-    descending_order='sort -r'
-  elif which tac &> /dev/null; then
-    descending_order='tac'
+  local reverse_order
+  if which tac &> /dev/null; then
+    reverse_order='tac'
   else
-    descending_order='tail -r'
+    reverse_order='tail -r'
   fi
   local trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
   local trim_duplication='awk '\''!dictionaty[$0]++'\'''
   local CMD=$(\history \
-              | eval $descending_order \
+              | eval $reverse_order \
               | eval $trim_line_number \
               | eval $trim_duplication \
               | peco --query "${READLINE_LINE}")
