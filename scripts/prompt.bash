@@ -1,5 +1,15 @@
 ########## TERMINAL CODE ##########
 if which git &> /dev/null; then
+  if [ $OS = 'Darwin' ]; then
+    # homebrew
+    source /usr/local/etc/bash_completion.d/git-prompt.sh
+    source /usr/local/etc/bash_completion.d/git-completion.bash
+  elif [ $OS = 'Linux' ]; then
+    # Already installed in ubuntu
+    # /etc/profile.d/bash_completion.sh
+    # /etc/bash_completion.d/git-prompt
+    :
+  fi
   #export GIT_PS1_SHOWUPSTREAM=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
   export GIT_PS1_SHOWSTASHSTATE=1
