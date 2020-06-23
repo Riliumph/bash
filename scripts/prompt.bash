@@ -39,22 +39,37 @@ MakeControlSequence()
 }
 
 ###
+# StatusFace
+# Judge last command status
+# Don't use MakeControlSequence
+# This function should be executed every paint
+# So, don't use escape sequence as string
+StatusFace() {
+  if [ $? -eq 0 ]; then
+    face="\e[32m(*'_')"
+  else
+    face="\e[31m(*;_;)"
+  fi
+  echo -e "${face}\e[m"
+}
+
+###
 # GetPromptString
 # Get prompt string in terminal
 GetPromptString()
 {
-  local DEBIAN_INFO=${debian_chroot:+($debian_chroot)}
   local GIT_BRANCH=''
   if which git &> /dev/null; then
     GIT_BRANCH='$(__git_ps1)'   # must single-quotation
   fi
+  local blue=$(MakeControlSequence 00 34)
   local white=$(MakeControlSequence 00 37)
   local B_lime=$(MakeControlSequence 01 32)
   local yellow=$(MakeControlSequence 00 33)
   local I_red=$(MakeControlSequence 03 31)
-  echo "${DEBIAN_INFO}${B_lime}\u${white}:${yellow}\w${white}|${I_red}${GIT_BRANCH}\n${white}\$ "
+  echo "${blue}\u${white}:${yellow}\w${white}|${I_red}${GIT_BRANCH}\e[m\n"
 }
 
-PS1=$(GetPromptString)
+PS1=$(GetPromptString)'$(StatusFace)'" \$ "
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 
