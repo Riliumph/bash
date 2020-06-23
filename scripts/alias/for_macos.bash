@@ -29,8 +29,6 @@ alias du='du -h'
 alias printenv='printenv | sort -f'
 alias less='less -gMNRqW'
 
-alias path='echo ${PATH} | tr : \\n'
-
 # Etc
 alias unpatch='patch -R'
 alias targz='tar cfvz'
