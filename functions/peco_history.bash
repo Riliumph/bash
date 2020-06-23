@@ -15,7 +15,12 @@ peco_history()
   else
     reverse_order='tail -r'
   fi
-  local trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
+  local trim_line_number
+  if [[ ${OS} = 'Mac' ]]; then
+    trim_line_number='sed -Ee "s/^ +[0-9]+ +//"'
+  else
+    trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
+  fi
   local trim_duplication='awk '\''!dictionaty[$0]++'\'''
   local CMD=$(\history \
               | eval $reverse_order \
