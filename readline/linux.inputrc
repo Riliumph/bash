@@ -1,0 +1,40 @@
+$if bash
+### shortcut key
+	"\e\e[C": forward-word    # Option+Right
+	"\e\e[D": backward-word   # Option+Left
+	TAB: menu-complete
+
+### Operation for completion
+	# on:  (Press tab key) 0.Show menu -> 2.Completion
+	# off: (Press tab key) 1.Completion
+	set show-all-if-ambiguous on
+	set show-all-if-unmodified on
+	set skip-completed-text on
+
+### Appearamce for completion
+	# Replace ~ with $HOME
+	set expand-tilde on
+	# show colored-completion word
+	set colored-stats on
+	# Apply ls -F to the completion candidate
+	set visible-stats on
+	# show "/" when symbolic link
+	set mark-symlinked-directories on
+	set print-completions-horizontally on
+	# Japanese Style
+	set output-meta on
+	set input-meta on
+	set convert-meta off
+
+### Behavior for completion
+	set completion-ignore-case off
+	# Complement without distinguishing between "-" and "_"
+	set completion-map-case on
+	set completion-query-items 100
+	# The length of the common part words
+	set completion-prefix-display-length 0
+	set menu-complete-display-prefix off
+	# audible or visible or none
+	set bell-style visible
+$endif
+

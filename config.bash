@@ -28,7 +28,11 @@ shopt -s extglob
 shopt -s globstar
 
 ### readline config
-INPUTRC="$BASH_ROOT/readline.inputrc"
+if [ "${OS}" == 'Linux' ]; then
+  INPUTRC="$BASH_ROOT/readline/macos.inputrc"
+elif [ "${OS}" == 'Mac' ]; then
+  INPUTRC="$BASH_ROOT/readline/linux.inputrc"
+fi
 
 ### Function definition
 source "$BASH_ROOT/functions/date_time.bash"
