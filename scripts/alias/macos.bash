@@ -3,8 +3,8 @@ alias refresh='source $HOME/.bashrc && echo "Refresh Bash"'
 alias version='echo "bash versions: ${BASH_VERSION}"'
 
 # File & Directory operation
-if which trash &> /dev/null; then
-  alias rm='trash-put'
+if which rmtrash &> /dev/null; then
+  alias rm='rmtrash'
 else
   alias rm='rm -v'
 fi
