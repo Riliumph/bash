@@ -42,7 +42,11 @@ source "$BASH_ROOT/functions/path.bash"
 ### Bash options
 source "$BASH_ROOT/scripts/env.bash"
 source "$BASH_ROOT/scripts/alias.bash"
-source "$BASH_ROOT/scripts/prompt.bash"
+if [[ ${OS} == 'Linux' ]]; then
+  source "$BASH_ROOT/scripts/prompt/linux.bash"
+elif [[ ${OS} == 'Mac' ]]; then
+  source "$BASH_ROOT/scripts/prompt/macos.bash"
+fi
 source "$BASH_ROOT/scripts/completion.bash"
 
 ### Use alias
