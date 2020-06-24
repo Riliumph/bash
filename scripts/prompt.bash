@@ -46,11 +46,11 @@ MakeControlSequence()
 # So, don't use escape sequence as string
 StatusFace() {
   if [ $? -eq 0 ]; then
-    face="\e[32m(*'_')"
+    face="\[\e[32m\](*'_')"
   else
-    face="\e[31m(*;_;)"
+    face="\[\e[31m\](*;_;)"
   fi
-  echo -e "${face}\e[m"
+  echo "${face}\[\e[m\]"
 }
 
 ###
@@ -62,14 +62,15 @@ GetPromptString()
   if which git &> /dev/null; then
     GIT_BRANCH='$(__git_ps1)'   # must single-quotation
   fi
+  local def="\[\e[0m\]"
   local blue=$(MakeControlSequence 00 34)
   local white=$(MakeControlSequence 00 37)
   local B_lime=$(MakeControlSequence 01 32)
   local yellow=$(MakeControlSequence 00 33)
   local I_red=$(MakeControlSequence 03 31)
-  echo "${blue}\u${white}:${yellow}\w${white}|${I_red}${GIT_BRANCH}\e[m\n"
+  echo "${blue}\u${def}:${yellow}\w${def}|${I_red}${GIT_BRANCH}${def}\n"
 }
 
-PS1=$(GetPromptString)'$(StatusFace)'" \$ "
+PS1=$(GetPromptString)$(StatusFace)" \$ "
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 
