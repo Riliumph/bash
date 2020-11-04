@@ -24,12 +24,15 @@ fi
 # This function should be executed every paint
 # So, don't use escape sequence as string
 StatusFace() {
-  if [ $? -eq 0 ]; then
-    face_c=$(tput setaf 2) # Cannot use color in dynamic prompt
-    face="(*'_')"
+  local status=$?
+  if [ $status -eq 0 ]; then
+    color=$(tput setaf 2) # Cannot use color in dynamic prompt
+    face="(*'_')< "
+    face+="$color""$status"
   else
-    face_c=$(tput setaf 1)
-    face="(*;_;)"
+    color=$(tput setaf 1)
+    face="(*;_;)< "
+    face+="$color""$status"
   fi
   echo "${face}"
 }
