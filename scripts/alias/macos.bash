@@ -16,9 +16,16 @@ alias link='ln -v'
 alias symlink='ln -nsf'
 
 # List segments
-alias ls='ls -FGx'
-alias la='ls -A'
-alias ll='clear && la -hl'
+if type exa &> /dev/null; then
+  alias ls='exa -F'
+  alias la='ls -a'
+  alias ll='la -l -ghHimS'
+  alias lt='ll -T'
+else
+  alias ls='ls -FGx'
+  alias la='ls -A'
+  alias ll='clear && la -hlT'
+fi
 
 # Show command
 if which htop &> /dev/null; then
