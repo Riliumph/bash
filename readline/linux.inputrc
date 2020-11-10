@@ -12,7 +12,7 @@ $if bash
 	set show-all-if-unmodified on
 	set skip-completed-text on
 
-### Appearamce for completion
+### Appearance for completion
 	# Replace ~ with $HOME
 	set expand-tilde on
 	# show colored-completion word

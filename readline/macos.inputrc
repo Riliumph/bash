@@ -1,7 +1,9 @@
 $if bash
 ### shortcut key
-	"\e\e[C": forward-word    # Option+Right
-	"\e\e[D": backward-word   # Option+Left
+	"\e[f": forward-word    # Opt+->
+	"\e[b": backward-word   # Opt+<-
+	"\e[1;5~": backward-kill-word # Opt+DEL
+	"\e[3;5~": kill-whole-line # Ctrl+DEL
 	TAB: menu-complete
 
 ### Operation for completion
@@ -11,7 +13,7 @@ $if bash
 	set show-all-if-unmodified on
 	set skip-completed-text on
 
-### Appearamce for completion
+### Appearance for completion
 	# Replace ~ with $HOME
 	set expand-tilde on
 	# show colored-completion word
