@@ -29,9 +29,9 @@ shopt -s globstar
 
 ### readline config
 if [ "${OS}" == 'Linux' ]; then
-  INPUTRC="$BASH_ROOT/readline/macos.inputrc"
-elif [ "${OS}" == 'Mac' ]; then
   INPUTRC="$BASH_ROOT/readline/linux.inputrc"
+elif [ "${OS}" == 'Mac' ]; then
+  INPUTRC="$BASH_ROOT/readline/macos.inputrc"
 fi
 
 ### Function definition
