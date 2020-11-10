@@ -1,8 +1,7 @@
 $if bash
 ### shortcut key
-	"\e[1;5C": forward-word    # Ctrl+Right
-	"\e[1;5D": backward-word   # Ctrl+Left
-	"\e[3;5~": kill-whole-line # Ctrl+Del
+	"\e\e[C": forward-word    # Option+Right
+	"\e\e[D": backward-word   # Option+Left
 	TAB: menu-complete
 
 ### Operation for completion
