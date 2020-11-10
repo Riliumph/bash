@@ -26,13 +26,13 @@ fi
 StatusFace() {
   local status=$?
   if [ $status -eq 0 ]; then
-    color=$(tput setaf 2) # Cannot use color in dynamic prompt
+    color='$(tput setaf 2)'
     face="(*'_')< "
-    face+="$color""$status"
+    face+="\[$color\]""$status"
   else
-    color=$(tput setaf 1)
+    color='$(tput setaf 1)'
     face="(*;_;)< "
-    face+="$color""$status"
+    face+="\[$color\]""$status"
   fi
   echo "${face}"
 }
@@ -46,10 +46,10 @@ SetPromptString()
   if which git &> /dev/null; then
     GIT_BRANCH='$(__git_ps1)' # Use single-quotation for dynamic prompt
   fi
-  local norm=$(tput sgr0)
-  local user=$(tput setaf 4)
-  local path=$(tput setaf 3)
-  local git=$(tput setaf 1)
+  local norm='$(tput sgr0)'
+  local user='$(tput setaf 4)'
+  local path='$(tput setaf 3)'
+  local git='$(tput setaf 1)'
   ps1=""
   ps1+="\[$user\]\u"
   ps1+="\[$norm\]:"
@@ -57,7 +57,7 @@ SetPromptString()
   ps1+="\[$norm\]|"
   ps1+="\[$git\]$GIT_BRANCH"
   ps1+="\[$norm\]\n"
-  ps1+='$(StatusFace)' # Use single-quotation for dynamic prompt
+  ps1+="$(StatusFace)"
   ps1+="\[$norm\] \$"
   echo $ps1
 }
