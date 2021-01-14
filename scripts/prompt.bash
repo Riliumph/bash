@@ -17,59 +17,52 @@ if which git &> /dev/null; then
 fi
 
 ###
-# MakeControlSequence
-# PLEASE USE WITH CAUTION
-# Because it only judges the number of arguments
-# @param $1 font type (00, 01, 04, 05)
-# @param $2 fg color (31 - 37)
-# @param $3 bg color (41 - 47)
-MakeControlSequence()
-{
-  local argc=$#
-  local font_type=$1
-  local fg_color=$2
-  local bg_color=$3
-  case ${argc} in
-    0) echo "Missing argument"; return 1;;
-    1) echo "\[\e[${font_type}\]"; return 0;;
-    2) echo "\[\e[${font_type};${fg_color}m\]"; return 0;;
-    3) echo "\[\e[${font_type};${fg_color}m\e[${bg_color}m\]"; return 0;;
-    *) echo "Too many argument"; return 1;;
-  esac
-}
-
-###
-# StatusFace
-# Judge last command status
-# Don't use MakeControlSequence
-# This function should be executed every paint
-# So, don't use escape sequence as string
-StatusFace() {
-  if [ $? -eq 0 ]; then
-    face="\e[32m(*'_')"
-  else
-    face="\e[31m(*;_;)"
-  fi
-  echo -e "${face}\e[m"
-}
-
-###
-# GetPromptString
-# Get prompt string in terminal
-GetPromptString()
-{
+# Prompt Factory
+PromptFactory(){
+  local last_status=${LAST_STATUS}
+  # Should enclose tput by escape sequence according to man page
+  local norm="\[$(tput sgr0)\]"
+  ps1=""
+  # Factory of Line 1
   local GIT_BRANCH=''
   if which git &> /dev/null; then
-    GIT_BRANCH='$(__git_ps1)'   # must single-quotation
+    # Use single-quotation to input function name in PS1
+    # __git_ps1 function need executing when PS1 is interpreted.
+    GIT_BRANCH='$(__git_ps1)'
   fi
-  local blue=$(MakeControlSequence 00 34)
-  local white=$(MakeControlSequence 00 37)
-  local B_lime=$(MakeControlSequence 01 32)
-  local yellow=$(MakeControlSequence 00 33)
-  local I_red=$(MakeControlSequence 03 31)
-  echo "${blue}\u${white}:${yellow}\w${white}|${I_red}${GIT_BRANCH}\e[m\n"
+  local user="\[$(tput setaf 4)\]"
+  local path="\[$(tput setaf 3)\]"
+  local git="\[$(tput setaf 1)\]"
+  ps1+="${user}\u"
+  ps1+="${norm}:"
+  ps1+="${path}\w"
+  ps1+="${norm}|"
+  ps1+="${git}${GIT_BRANCH}"
+  ps1+="${norm}\n"
+  # Factory of Line 2
+  if [ ${last_status} -eq 0 ]; then
+    face="(*'_')< "
+    err="\[$(tput setaf 2)\]"
+  else
+    face="(*;_;)< "
+    err="\[$(tput setaf 1)\]"
+  fi
+  ps1+="${face}"
+  ps1+="${err}${last_status} "
+  ps1+="${norm}\$ "
+  # Finalize PS1
+  PS1=${ps1}
 }
 
-PS1=$(GetPromptString)'$(StatusFace)'" \$ "
+###
+# Dispatch
+# Do not write complex and long command in PROMPT_COMMAND directly
+# Use the dispatch function that wraps the process
+Dispatch(){
+  export LAST_STATUS="$?"
+  PromptFactory
+  share_history
+}
+export PROMPT_COMMAND='Dispatch'
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 

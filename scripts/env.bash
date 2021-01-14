@@ -11,7 +11,6 @@ share_history()
   history -r  # Reload history from bash_history
 }
 
-PROMPT_COMMAND='share_history'
 shopt -u histappend  # Unset shell option
 export HISTCONTROL=ignoreboth   # ex) ignoredups,ignorespace,erasedups
 ### Ignore commands

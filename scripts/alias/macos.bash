@@ -3,8 +3,8 @@ alias refresh='source $HOME/.bashrc && echo "Refresh Bash"'
 alias version='echo "bash versions: ${BASH_VERSION}"'
 
 # File & Directory operation
-if which trash &> /dev/null; then
-  alias rm='trash-put'
+if which rmtrash &> /dev/null; then
+  alias rm='rmtrash'
 else
   alias rm='rm -v'
 fi
@@ -16,9 +16,16 @@ alias link='ln -v'
 alias symlink='ln -nsf'
 
 # List segments
-alias ls='ls -FGx'
-alias la='ls -A'
-alias ll='clear && la -hl'
+if type exa &> /dev/null; then
+  alias ls='exa -F'
+  alias la='ls -a'
+  alias ll='la -l -ghHimS'
+  alias lt='ll -T'
+else
+  alias ls='ls -FGx'
+  alias la='ls -A'
+  alias ll='clear && la -hlT'
+fi
 
 # Show command
 if which htop &> /dev/null; then
