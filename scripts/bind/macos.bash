@@ -1,9 +1,9 @@
 # Attention: No need bind's option "-x"
 if [[ ${PS1} ]]; then
-  bind -x '"\e[A" : cd ../'
+  bind '"\e[1;3A":"\e[3;5~\ercd ../\n"'
 fi
 
 if type peco &> /dev/null; then
-  bind -x '"\e[B" : cd'
+  bind '"\e[1;3B":"\ercd\n"'
 fi
 
