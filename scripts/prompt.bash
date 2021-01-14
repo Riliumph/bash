@@ -19,7 +19,7 @@ fi
 ###
 # Prompt Factory
 PromptFactory(){
-  local last_status=${EXIT_STATUS}
+  local last_status=${LAST_STATUS}
   # Should enclose tput by escape sequence according to man page
   local norm="\[$(tput sgr0)\]"
   ps1=""
@@ -59,7 +59,7 @@ PromptFactory(){
 # Do not write complex and long command in PROMPT_COMMAND directly
 # Use the dispatch function that wraps the process
 Dispatch(){
-  export EXIT_STATUS="$?"
+  export LAST_STATUS="$?"
   PromptFactory
   share_history
 }
