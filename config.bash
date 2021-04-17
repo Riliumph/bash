@@ -3,6 +3,13 @@
 # It is only allowed for.bashell scripts with execution privileges.
 # set -u   Don't allow here
 
+if [[ ! -t 1 ]];then
+  echo "Cannot use stdout(fd 1)"
+  # Do not exe to avoid following error in scp
+  # bind: warning: line editing not enabled
+  return;
+fi
+
 if [[ ! -v BASH_ROOT ]];then
   echo '$BASH_ROOT is undefined!!'
   return 1
