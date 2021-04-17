@@ -28,7 +28,7 @@ fi
 #    Execute cdls commands
 # Args "-" ( optional args num 1)
 #    Show path-history you have moved by peco
-custom_cdls()
+custom_cd()
 {
   local -r argc=$#
   local destination=$*
@@ -39,23 +39,26 @@ custom_cdls()
        fi
        ;;
     1) destination=$1
-       if which peco &> /dev/null; then
-         if [[ ${destination} == '-' ]];then
-           local trim_duplication='awk '\''!dictionaty[$0]++'\'''
-           local reverse_order
-           if which tac &> /dev/null; then
-             reverse_order='tac'
-           else
-             reverse_order='tail -r'
-           fi
-           destination=$(\cat ${CD_HISTORY_FOR_BASH} \
+       ;;
+  esac
+
+  # History Option
+  if [[ ${destination} == '-' ]];then
+    if which peco &> /dev/null; then
+      local trim_duplication='awk '\''!dictionaty[$0]++'\'''
+      local reverse_order
+      if which tac &> /dev/null; then
+        reverse_order='tac'
+      else
+        reverse_order='tail -r'
+      fi
+      destination=$(\cat ${CD_HISTORY_FOR_BASH} \
                   | eval ${reverse_order} \
                   | eval ${trim_duplication} \
                   | peco) # Cannot use --query option
-         fi
-       fi
-       ;;
-  esac
+    fi
+  fi
+
   # Don't move $HOME
   if [ -z $destination ]; then
     echo 'Missing args';
@@ -73,7 +76,7 @@ custom_cdls()
   pwd >> ${CD_HISTORY_FOR_BASH}
 }
 
-alias cd='custom_cdls'
+alias cd='custom_cd'
 
 ###
 # _clean_history
