@@ -28,20 +28,17 @@ source "$BASH_ROOT/conf.d/history.bash"
 source "$BASH_ROOT/scripts/global.bash"
 
 ### readline config
-if [ "${OS}" == 'Linux' ]; then
-  INPUTRC="$BASH_ROOT/readline/linux.inputrc"
-elif [ "${OS}" == 'MacOS' ]; then
-  INPUTRC="$BASH_ROOT/readline/macos.inputrc"
-fi
+INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
 ### Function definition
 source "$BASH_ROOT/functions/date_time.bash"
 source "$BASH_ROOT/functions/seds.bash"
 source "$BASH_ROOT/functions/path.bash"
+source "$BASH_ROOT/functions/asc_order.bash"
 
 ### Bash options
 source "$BASH_ROOT/scripts/env.bash"
-source "$BASH_ROOT/scripts/alias.bash"
+source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
 source "$BASH_ROOT/scripts/prompt.bash"
 source "$BASH_ROOT/scripts/completion.bash"
 
@@ -52,5 +49,5 @@ if which peco &> /dev/null; then
 fi
 
 ### Use other setting
-source "$BASH_ROOT/scripts/bind.bash"
+source "$BASH_ROOT/scripts/bind/${OS,,}.bash"
 
