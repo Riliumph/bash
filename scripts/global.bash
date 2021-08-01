@@ -1,3 +1,4 @@
 ### global variable tools
-#trim_duplication='awk '\''!dictionaty[$0]++'\'''
+# Attention to how to escape single-quotation
+trim_duplication='awk '\''!dictionaty[$0]++'\'''
 

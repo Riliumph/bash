@@ -3,7 +3,7 @@ asc_order()
   local argv=$@
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-    if [ "${argv}" == "" ]; then 
+    if [[ "${argv}" == "" ]]; then
       argv=$(cat -)
     fi
   fi
@@ -16,7 +16,7 @@ reverse_order()
   local argv=$@
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-    if [ "${argv}" == "" ]; then 
+    if [[ "${argv}" == "" ]]; then
       argv=$(cat -)
     fi
   fi

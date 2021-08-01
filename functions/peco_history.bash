@@ -10,7 +10,7 @@
 peco_history()
 {
   local trim_line_number
-  if [[ ${OS} = 'MacOS' ]]; then
+  if [[ ${OS} == 'MacOS' ]]; then
     trim_line_number='sed -Ee "s/^ +[0-9]+ +//"'
   else
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
@@ -18,8 +18,8 @@ peco_history()
   local trim_duplication='awk '\''!dictionaty[$0]++'\'''
   local CMD=$(\history \
               | reverse_order \
-              | eval $trim_line_number \
-              | eval $trim_duplication \
+              | eval ${trim_line_number} \
+              | eval ${trim_duplication} \
               | peco --query "${READLINE_LINE}")
   READLINE_LINE="${CMD}"  # Input to terminal's readline
   READLINE_POINT=${#CMD}  # Set cursor
