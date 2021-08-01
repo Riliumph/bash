@@ -45,7 +45,7 @@ custom_cd()
   if [[ ${destination} == '-' ]];then
     if which peco &> /dev/null; then
       destination=$(\cat ${CD_HISTORY_FOR_BASH} \
-                  | eval ${reverse_order} \
+                  | reverse_order \
                   | eval ${trim_duplication} \
                   | peco) # Cannot use --query option
     fi
@@ -78,9 +78,9 @@ _clean_dir_history()
 {
   # Read history file
   uniq_ary=($(cat ${CD_HISTORY_FOR_BASH} \
-           | eval $reverse_order \
+           | reverse_order \
            | eval $trim_duplication \
-           | eval $reverse_order))
+           | reverse_order))
   \cp $CD_HISTORY_FOR_BASH $CD_HISTORY_FOR_BASH.bak &> /dev/null
   :> ${CD_HISTORY_FOR_BASH} # truncate file
   for line in "${uniq_ary[@]}"; do
