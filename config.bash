@@ -29,7 +29,7 @@ source "$BASH_ROOT/scripts/global.bash"
 ### readline config
 if [ "${OS}" == 'Linux' ]; then
   INPUTRC="$BASH_ROOT/readline/linux.inputrc"
-elif [ "${OS}" == 'Mac' ]; then
+elif [ "${OS}" == 'MacOS' ]; then
   INPUTRC="$BASH_ROOT/readline/macos.inputrc"
 fi
 

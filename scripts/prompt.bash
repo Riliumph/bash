@@ -1,6 +1,6 @@
 ########## TERMINAL CODE ##########
 if which git &> /dev/null; then
-  if [ $OS = 'Mac' ]; then
+  if [ $OS = 'MacOS' ]; then
     # homebrew
     source /usr/local/opt/git/etc/bash_completion.d/git-completion.bash
     source /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh

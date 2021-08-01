@@ -16,7 +16,7 @@ peco_history()
     reverse_order='tail -r'
   fi
   local trim_line_number
-  if [[ ${OS} = 'Mac' ]]; then
+  if [[ ${OS} = 'MacOS' ]]; then
     trim_line_number='sed -Ee "s/^ +[0-9]+ +//"'
   else
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
