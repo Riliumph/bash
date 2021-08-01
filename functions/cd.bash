@@ -34,7 +34,7 @@ custom_cd()
   local destination=$*
   case ${argc} in
     0) if which peco &> /dev/null; then
-         destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | eval $asc_order | peco)
+         destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
        fi
        ;;
     1) destination=$1
