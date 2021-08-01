@@ -34,8 +34,7 @@ custom_cd()
   local destination=$*
   case ${argc} in
     0) if which peco &> /dev/null; then
-         local asc_order='sort -f'
-         destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | eval $asc_order | peco)
+         destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
        fi
        ;;
     1) destination=$1
@@ -45,15 +44,8 @@ custom_cd()
   # History Option
   if [[ ${destination} == '-' ]];then
     if which peco &> /dev/null; then
-      local trim_duplication='awk '\''!dictionaty[$0]++'\'''
-      local reverse_order
-      if which tac &> /dev/null; then
-        reverse_order='tac'
-      else
-        reverse_order='tail -r'
-      fi
       destination=$(\cat ${CD_HISTORY_FOR_BASH} \
-                  | eval ${reverse_order} \
+                  | reverse_order \
                   | eval ${trim_duplication} \
                   | peco) # Cannot use --query option
     fi
@@ -84,18 +76,11 @@ alias cd='custom_cd'
 #
 _clean_dir_history()
 {
-  local trim_duplication='awk '\''!dictionaty[$0]++'\'''
-  local reverse_order
-  if which tac &> /dev/null; then
-      reverse_order='tac'
-  else
-      reverse_order='tail -r'
-  fi
   # Read history file
   uniq_ary=($(cat ${CD_HISTORY_FOR_BASH} \
-           | eval $reverse_order \
+           | reverse_order \
            | eval $trim_duplication \
-           | eval $reverse_order))
+           | reverse_order))
   \cp $CD_HISTORY_FOR_BASH $CD_HISTORY_FOR_BASH.bak &> /dev/null
   :> ${CD_HISTORY_FOR_BASH} # truncate file
   for line in "${uniq_ary[@]}"; do

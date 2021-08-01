@@ -15,18 +15,6 @@ if [[ ! -v BASH_ROOT ]];then
   return 1
 fi
 
-########## OPERATION SYSTEM ##########
-if [ "$(uname)" == 'Darwin' ]; then
-  OS='Mac'
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-  OS='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
-  OS='Cygwin'
-else
-  echo "Your platform ($(uname -a)) is not supported."
-  exit 1
-fi
-
 ### bash secret power
 shopt -s expand_aliases    # for non-interactive shell
 shopt -s cdspell           # estimate spell miss
@@ -34,21 +22,23 @@ shopt -s dirspell          # complement by ignorring upper & lower case
 shopt -s extglob
 shopt -s globstar
 
+### Global variable
+source "$BASH_ROOT/conf.d/os.bash"
+source "$BASH_ROOT/conf.d/history.bash"
+source "$BASH_ROOT/scripts/global.bash"
+
 ### readline config
-if [ "${OS}" == 'Linux' ]; then
-  INPUTRC="$BASH_ROOT/readline/linux.inputrc"
-elif [ "${OS}" == 'Mac' ]; then
-  INPUTRC="$BASH_ROOT/readline/macos.inputrc"
-fi
+INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
 ### Function definition
 source "$BASH_ROOT/functions/date_time.bash"
 source "$BASH_ROOT/functions/seds.bash"
 source "$BASH_ROOT/functions/path.bash"
+source "$BASH_ROOT/functions/order.bash"
 
 ### Bash options
 source "$BASH_ROOT/scripts/env.bash"
-source "$BASH_ROOT/scripts/alias.bash"
+source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
 source "$BASH_ROOT/scripts/prompt.bash"
 source "$BASH_ROOT/scripts/completion.bash"
 
@@ -59,5 +49,5 @@ if which peco &> /dev/null; then
 fi
 
 ### Use other setting
-source "$BASH_ROOT/scripts/bind.bash"
+source "$BASH_ROOT/scripts/bind/${OS,,}.bash"
 
