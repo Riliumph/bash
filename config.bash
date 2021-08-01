@@ -24,6 +24,7 @@ shopt -s globstar
 
 ### Global variable
 source "$BASH_ROOT/conf.d/os.bash"
+source "$BASH_ROOT/conf.d/history.bash"
 source "$BASH_ROOT/scripts/global.bash"
 
 ### readline config
