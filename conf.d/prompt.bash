@@ -17,10 +17,28 @@ if which git &> /dev/null; then
 fi
 
 ###
+# __get_face_status
+# Don't need escape sequence
+# Because this function should execute dynamically
+# like __git_ps1 function
+__get_face_status()
+{
+  if [ ${LAST_STATUS} -eq 0 ]; then
+    face="(*'_')< "
+    err="$(tput setaf 2)" # without escape sequence
+  else
+    face="(*;_;)< "
+    err="$(tput setaf 1)" # without escape sequence
+  fi
+  echo "${face}${err}${LAST_STATUS}"
+}
+
+###
 # Prompt Factory
-PromptFactory(){
-  local last_status=${LAST_STATUS}
-  # Should enclose tput by escape sequence according to man page
+PromptFactory()
+{
+  local FACE='$(__get_face_status)'
+  # According to man page, you should enclose tput by escape sequence
   local norm="\[$(tput sgr0)\]"
   ps1=""
   # Factory of Line 1
@@ -40,18 +58,10 @@ PromptFactory(){
   ps1+="${git}${GIT_BRANCH}"
   ps1+="${norm}\n"
   # Factory of Line 2
-  if [ ${last_status} -eq 0 ]; then
-    face="(*'_')< "
-    err="\[$(tput setaf 2)\]"
-  else
-    face="(*;_;)< "
-    err="\[$(tput setaf 1)\]"
-  fi
-  ps1+="${face}"
-  ps1+="${err}${last_status} "
-  ps1+="${norm}\$ "
+  ps1+="${FACE}"
+  ps1+="${norm} \$ "
   # Finalize PS1
-  PS1=${ps1}
+  echo "${ps1}"
 }
 
 ###
@@ -60,9 +70,10 @@ PromptFactory(){
 # Use the dispatch function that wraps the process
 Dispatch(){
   export LAST_STATUS="$?"
-  PromptFactory
+  #PromptFactory
   share_history
 }
 export PROMPT_COMMAND='Dispatch'
+export PS1="$(PromptFactory)"
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 

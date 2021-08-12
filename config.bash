@@ -26,6 +26,7 @@ shopt -s globstar
 source "$BASH_ROOT/conf.d/os.bash"
 source "$BASH_ROOT/conf.d/history.bash"
 source "$BASH_ROOT/scripts/global.bash"
+source "$BASH_ROOT/conf.d/prompt.bash"
 
 ### readline config
 INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
@@ -39,7 +40,6 @@ source "$BASH_ROOT/functions/order.bash"
 ### Bash options
 source "$BASH_ROOT/scripts/env.bash"
 source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
-source "$BASH_ROOT/scripts/prompt.bash"
 source "$BASH_ROOT/scripts/completion.bash"
 
 ### Use alias
