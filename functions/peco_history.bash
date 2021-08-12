@@ -15,11 +15,10 @@ peco_history()
   else
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
   fi
-  local trim_duplication='awk '\''!dictionaty[$0]++'\'''
   local CMD=$(\history \
               | reverse_order \
               | eval ${trim_line_number} \
-              | eval ${trim_duplication} \
+              | eval ${unique} \
               | peco --query "${READLINE_LINE}")
   READLINE_LINE="${CMD}"  # Input to terminal's readline
   READLINE_POINT=${#CMD}  # Set cursor

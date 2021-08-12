@@ -25,7 +25,7 @@ shopt -s globstar
 ### Global variable
 source "$BASH_ROOT/conf.d/os.bash"
 source "$BASH_ROOT/conf.d/history.bash"
-source "$BASH_ROOT/scripts/global.bash"
+source "$BASH_ROOT/conf.d/global.bash"
 source "$BASH_ROOT/conf.d/prompt.bash"
 source "$BASH_ROOT/conf.d/env.bash"
 

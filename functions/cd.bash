@@ -46,7 +46,7 @@ custom_cd()
     if which peco &> /dev/null; then
       destination=$(\cat ${CD_HISTORY_FOR_BASH} \
                   | reverse_order \
-                  | eval ${trim_duplication} \
+                  | eval ${unique} \
                   | peco) # Cannot use --query option
     fi
   fi
@@ -79,7 +79,7 @@ _clean_dir_history()
   # Read history file
   uniq_ary=($(cat ${CD_HISTORY_FOR_BASH} \
            | reverse_order \
-           | eval $trim_duplication \
+           | eval $unique \
            | reverse_order))
   \cp $CD_HISTORY_FOR_BASH $CD_HISTORY_FOR_BASH.bak &> /dev/null
   :> ${CD_HISTORY_FOR_BASH} # truncate file
