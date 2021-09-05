@@ -18,48 +18,47 @@ fi
 
 ###
 # __get_face_status
-# Don't need escape sequence
-# Because this function should execute dynamically
-# like __git_ps1 function
+# > You can use terminfo/ANSI escape sequences inside substituted functions but not Bash escapes.
+# > In particular \[ \] will not work for surrounding non-printable characters.
+# > Instead you can use the octal escapes \001 and \002 (e.g. using printf or echo -e).
+# > https://wiki.archlinux.org/title/Bash/Prompt_customization
 __get_face_status()
 {
+  # If put escape sequence(\[,\]), display it
+  # If don't put escape sequence, appear new line problem in terminal
+  local success="(*'_')< $(tput setaf 2)"
+  local failure="(*;_;)< $(tput setaf 1)"
   if [ ${LAST_STATUS} -eq 0 ]; then
-    face="(*'_')< "
-    err="$(tput setaf 2)" # without escape sequence
+    echo -e ${success}${LAST_STATUS}
   else
-    face="(*;_;)< "
-    err="$(tput setaf 1)" # without escape sequence
+    echo -e ${failure}{$LAST_STATUS}
   fi
-  echo "${face}${err}${LAST_STATUS}"
 }
 
 ###
 # Prompt Factory
+# This expect to be used as embedding command enclosed double-quotes
+# > Wrapping the tput output in \[ \] is recommended by the Bash man page.
+# > This helps Bash ignore non-printable characters so that it correctly calculates the size of the prompt.
+# > # > https://wiki.archlinux.org/title/Bash/Prompt_customization
 PromptFactory()
 {
-  local FACE='$(__get_face_status)'
-  # According to man page, you should enclose tput by escape sequence
-  local norm="\[$(tput sgr0)\]"
-  ps1=""
-  # Factory of Line 1
   local GIT_BRANCH=''
   if which git &> /dev/null; then
-    # Use single-quotation to input function name in PS1
-    # __git_ps1 function need executing when PS1 is interpreted.
+    # __git_ps1 need executing when PS1 is interpreted.
     GIT_BRANCH='$(__git_ps1)'
   fi
+  local FACE='$(__get_face_status)'
+  # color
+  local norm="\[$(tput sgr0)\]"
   local user="\[$(tput setaf 4)\]"
   local path="\[$(tput setaf 3)\]"
   local git="\[$(tput setaf 1)\]"
-  ps1+="${user}\u"
-  ps1+="${norm}:"
-  ps1+="${path}\w"
-  ps1+="${norm}|"
-  ps1+="${git}${GIT_BRANCH}"
-  ps1+="${norm}\n"
+  local ps1=""
+  # Factory of Line 1
+  ps1+="${user}\u${norm}:${path}\w${norm}|${git}${GIT_BRANCH}\n"
   # Factory of Line 2
-  ps1+="${FACE}"
-  ps1+="${norm} \$ "
+  ps1+="${norm}${FACE}${norm} \$ "
   # Finalize PS1
   echo "${ps1}"
 }
@@ -70,10 +69,12 @@ PromptFactory()
 # Use the dispatch function that wraps the process
 Dispatch(){
   export LAST_STATUS="$?"
-  #PromptFactory
   share_history
 }
+
+# Enclose in single quotes for dynamic operation
 export PROMPT_COMMAND='Dispatch'
+# Enclose in double quotes for static operation
 export PS1="$(PromptFactory)"
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 
