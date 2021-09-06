@@ -1,20 +1,9 @@
-# Check environment value
-if [[ ! -v CACHE_DIR_FOR_BASH ]]; then
-  # If CACHE_DIR_FOR_BASH is undefined,
-  # set default path,
-  export CACHE_DIR_FOR_BASH=${BASH_ROOT}/cache
-fi
 
-# Check log directory existance
-if [[ ! -d CACHE_DIR_FOR_BASH ]];then
-  mkdir -p ${CACHE_DIR_FOR_BASH}
-fi
-
-CD_HISTORY_FOR_BASH=${CACHE_DIR_FOR_BASH}/cd_history.log
+CD_HISTORY=${CACHE}/cd_history.log
 
 # Check log file existance
-if [[ ! -f CD_HISTORY_FOR_BASH ]]; then
-  touch "${CD_HISTORY_FOR_BASH}"
+if [[ ! -f CD_HISTORY ]]; then
+  touch "${CD_HISTORY}"
 fi
 
 ###
@@ -44,7 +33,7 @@ custom_cd()
   # History Option
   if [[ ${destination} == '-' ]];then
     if which peco &> /dev/null; then
-      destination=$(\cat ${CD_HISTORY_FOR_BASH} \
+      destination=$(\cat ${CD_HISTORY} \
                   | reverse_order \
                   | eval ${unique} \
                   | peco) # Cannot use --query option
@@ -65,7 +54,7 @@ custom_cd()
   clear && ls
 
   # Log path history and Convert relative path to absolute path
-  pwd >> ${CD_HISTORY_FOR_BASH}
+  pwd >> ${CD_HISTORY}
 }
 
 alias cd='custom_cd'
@@ -77,15 +66,15 @@ alias cd='custom_cd'
 _clean_dir_history()
 {
   # Read history file
-  uniq_ary=($(cat ${CD_HISTORY_FOR_BASH} \
+  uniq_ary=($(cat ${CD_HISTORY} \
            | reverse_order \
            | eval $unique \
            | reverse_order))
-  \cp $CD_HISTORY_FOR_BASH $CD_HISTORY_FOR_BASH.bak &> /dev/null
-  :> ${CD_HISTORY_FOR_BASH} # truncate file
+  \cp $CD_HISTORY $CD_HISTORY.bak &> /dev/null
+  :> ${CD_HISTORY} # truncate file
   for line in "${uniq_ary[@]}"; do
     if [[ -e $line ]]; then
-      echo $line >> ${CD_HISTORY_FOR_BASH}
+      echo $line >> ${CD_HISTORY}
     fi
   done
 }
