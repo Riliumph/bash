@@ -31,7 +31,7 @@ __get_face_status()
   if [ ${LAST_STATUS} -eq 0 ]; then
     echo -e ${success}${LAST_STATUS}
   else
-    echo -e ${failure}{$LAST_STATUS}
+    echo -e ${failure}${LAST_STATUS}
   fi
 }
 
