@@ -1,4 +1,3 @@
-
 CD_HISTORY=${CACHE}/cd_history.log
 
 # Check log file existance
@@ -61,15 +60,13 @@ alias cd='custom_cd'
 
 ###
 # _clean_history
-#
-#
 _clean_dir_history()
 {
   # Read history file
-  uniq_ary=($(cat ${CD_HISTORY} \
-           | reverse_order \
-           | eval $unique \
-           | reverse_order))
+  local -r uniq_ary=($(cat ${CD_HISTORY} \
+                  | reverse_order \
+                  | eval $unique \
+                  | reverse_order))
   \cp $CD_HISTORY $CD_HISTORY.bak &> /dev/null
   :> ${CD_HISTORY} # truncate file
   for line in "${uniq_ary[@]}"; do

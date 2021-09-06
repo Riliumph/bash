@@ -23,24 +23,23 @@ shopt -s extglob
 shopt -s globstar
 
 ### Global variable
-source "$BASH_ROOT/conf.d/os.bash"
-source "$BASH_ROOT/conf.d/history.bash"
-source "$BASH_ROOT/conf.d/global.bash"
-source "$BASH_ROOT/conf.d/prompt.bash"
 source "$BASH_ROOT/conf.d/env.bash"
+source "$BASH_ROOT/conf.d/global.bash"
+source "$BASH_ROOT/conf.d/history.bash"
+source "$BASH_ROOT/conf.d/prompt.bash"
+source "$BASH_ROOT/conf.d/completion.bash"
 
 ### readline config
 INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
 ### Function definition
 source "$BASH_ROOT/functions/date_time.bash"
-source "$BASH_ROOT/functions/seds.bash"
-source "$BASH_ROOT/functions/path.bash"
 source "$BASH_ROOT/functions/order.bash"
+source "$BASH_ROOT/functions/path.bash"
+source "$BASH_ROOT/functions/seds.bash"
 
 ### Bash options
 source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
-source "$BASH_ROOT/scripts/completion.bash"
 
 ### Use alias
 source "$BASH_ROOT/functions/cd.bash"
