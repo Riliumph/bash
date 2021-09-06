@@ -26,8 +26,8 @@ __get_face_status()
 {
   # If put escape sequence(\[,\]), display it
   # If don't put escape sequence, appear new line problem in terminal
-  local success="(*'_')< $(tput setaf 2)"
-  local failure="(*;_;)< $(tput setaf 1)"
+  local success="(*'_')<" # \[$(tput setaf 2)\]"
+  local failure="(*;_;)<" # \[$(tput setaf 1)\]"
   if [ ${LAST_STATUS} -eq 0 ]; then
     echo -e ${success}${LAST_STATUS}
   else
