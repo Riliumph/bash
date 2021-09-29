@@ -29,9 +29,9 @@ __get_face_status()
   local success="(*'_')<" # \[$(tput setaf 2)\]"
   local failure="(*;_;)<" # \[$(tput setaf 1)\]"
   if [ ${LAST_STATUS} -eq 0 ]; then
-    echo -e ${success}${LAST_STATUS}
+    printf "%s %3d" ${success} ${LAST_STATUS}
   else
-    echo -e ${failure}${LAST_STATUS}
+    printf "%s %3d" ${failure} ${LAST_STATUS}
   fi
 }
 
@@ -40,7 +40,7 @@ __get_face_status()
 # This expect to be used as embedding command enclosed double-quotes
 # > Wrapping the tput output in \[ \] is recommended by the Bash man page.
 # > This helps Bash ignore non-printable characters so that it correctly calculates the size of the prompt.
-# > # > https://wiki.archlinux.org/title/Bash/Prompt_customization
+# > https://wiki.archlinux.org/title/Bash/Prompt_customization
 PromptFactory()
 {
   local GIT_BRANCH=''
