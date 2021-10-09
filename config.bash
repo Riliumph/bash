@@ -3,21 +3,16 @@
 # It is only allowed for.bashell scripts with execution privileges.
 # set -u   Don't allow here
 
+if [[ ! -t 1 ]];then
+  echo "Cannot use stdout(fd 1)"
+  # Do not exe to avoid following error in scp
+  # bind: warning: line editing not enabled
+  return;
+fi
+
 if [[ ! -v BASH_ROOT ]];then
   echo '$BASH_ROOT is undefined!!'
   return 1
-fi
-
-########## OPERATION SYSTEM ##########
-if [ "$(uname)" == 'Darwin' ]; then
-  OS='Mac'
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
-  OS='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
-  OS='Cygwin'
-else
-  echo "Your platform ($(uname -a)) is not supported."
-  exit 1
 fi
 
 ### bash secret power
@@ -27,23 +22,24 @@ shopt -s dirspell          # complement by ignorring upper & lower case
 shopt -s extglob
 shopt -s globstar
 
+### Global variable
+source "$BASH_ROOT/conf.d/env.bash"
+source "$BASH_ROOT/conf.d/global.bash"
+source "$BASH_ROOT/conf.d/history.bash"
+source "$BASH_ROOT/conf.d/prompt.bash"
+source "$BASH_ROOT/conf.d/completion.bash"
+
 ### readline config
-if [ "${OS}" == 'Linux' ]; then
-  INPUTRC="$BASH_ROOT/readline/linux.inputrc"
-elif [ "${OS}" == 'Mac' ]; then
-  INPUTRC="$BASH_ROOT/readline/macos.inputrc"
-fi
+INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
 ### Function definition
 source "$BASH_ROOT/functions/date_time.bash"
-source "$BASH_ROOT/functions/seds.bash"
+source "$BASH_ROOT/functions/order.bash"
 source "$BASH_ROOT/functions/path.bash"
+source "$BASH_ROOT/functions/seds.bash"
 
 ### Bash options
-source "$BASH_ROOT/scripts/env.bash"
-source "$BASH_ROOT/scripts/alias.bash"
-source "$BASH_ROOT/scripts/prompt.bash"
-source "$BASH_ROOT/scripts/completion.bash"
+source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
 
 ### Use alias
 source "$BASH_ROOT/functions/cd.bash"
@@ -52,5 +48,5 @@ if which peco &> /dev/null; then
 fi
 
 ### Use other setting
-source "$BASH_ROOT/scripts/bind.bash"
+source "$BASH_ROOT/scripts/bind/${OS,,}.bash"
 

@@ -10,4 +10,3 @@ _comp_only_file(){
 }
 
 complete -d ls  # default: complete -F _longopt ls
-
