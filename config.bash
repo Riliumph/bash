@@ -32,6 +32,12 @@ source "$BASH_ROOT/conf.d/completion.bash"
 ### readline config
 INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
+### LS_COLOR config
+if type dircolros &> /dev/null; then
+  COLORRC="$BASH_ROOT/conf.d/${OS,,}.colorrc"
+  eval ${"dircolors $COLORRC"}
+fi
+
 ### Function definition
 source "$BASH_ROOT/functions/date_time.bash"
 source "$BASH_ROOT/functions/order.bash"
