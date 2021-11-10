@@ -33,9 +33,9 @@ source "$BASH_ROOT/conf.d/completion.bash"
 INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
 ### LS_COLOR config
-if type dircolros &> /dev/null; then
+if type dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${OS,,}.colorrc"
-  eval ${"dircolors $COLORRC"}
+  eval $(dircolors "${COLORRC}")
 fi
 
 ### Function definition
