@@ -50,13 +50,14 @@ PromptFactory()
   fi
   local FACE='$(__get_face_status)'
   # color
-  local norm="\[$(tput sgr0)\]"
-  local user="\[$(tput setaf 4)\]"
-  local path="\[$(tput setaf 3)\]"
-  local git="\[$(tput setaf 1)\]"
+  local norm="\[$(tput sgr0)\]"    # white
+  local host="\[$(tput setaf 2)\]" # green
+  local user="\[$(tput setaf 4)\]" # blue
+  local path="\[$(tput setaf 3)\]" # yellow
+  local git="\[$(tput setaf 1)\]"  # red
   local ps1=""
   # Factory of Line 1
-  ps1+="${user}\u${norm}:${path}\w${norm}|${git}${GIT_BRANCH}\n"
+  ps1+="${user}\u${norm}@${host}\h${norm}:${path}\w${norm}|${git}${GIT_BRANCH}\n"
   # Factory of Line 2
   ps1+="${norm}${FACE}${norm} \$ "
   # Finalize PS1
