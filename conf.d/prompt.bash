@@ -44,7 +44,7 @@ __get_face_status()
 PromptFactory()
 {
   local GIT_BRANCH=''
-  if which git &> /dev/null; then
+  if type __git_ps1 &> /dev/null; then
     # __git_ps1 need executing when PS1 is interpreted.
     GIT_BRANCH='$(__git_ps1)'
   fi
