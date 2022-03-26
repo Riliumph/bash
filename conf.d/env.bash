@@ -10,6 +10,9 @@ else
   exit 1
 fi
 
+# Set up special command path
+export PATH="${BASH_ROOT}/.local/bin":${PATH}
+
 ########## ENVIRONMNT LANGUAGE ##########
 #export LANG='ja_JP.UTF-8'
 #export LC_ALL='ja_JP.UTF-8'
