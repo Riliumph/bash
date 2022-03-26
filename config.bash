@@ -43,6 +43,7 @@ source "$BASH_ROOT/functions/date_time.bash"
 source "$BASH_ROOT/functions/order.bash"
 source "$BASH_ROOT/functions/path.bash"
 source "$BASH_ROOT/functions/seds.bash"
+source "$BASH_ROOT/functions/unique.bash"
 
 ### Bash options
 source "$BASH_ROOT/scripts/alias/${OS,,}.bash"

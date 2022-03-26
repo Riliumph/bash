@@ -34,7 +34,7 @@ custom_cd()
     if which peco &> /dev/null; then
       destination=$(\cat ${CD_HISTORY} \
                   | reverse_order \
-                  | eval ${unique} \
+                  | unique \
                   | peco) # Cannot use --query option
     fi
   fi
@@ -65,7 +65,7 @@ _clean_dir_history()
   # Read history file
   local -r uniq_ary=($(cat ${CD_HISTORY} \
                   | reverse_order \
-                  | eval $unique \
+                  | unique \
                   | reverse_order))
   \cp $CD_HISTORY $CD_HISTORY.bak &> /dev/null
   :> ${CD_HISTORY} # truncate file

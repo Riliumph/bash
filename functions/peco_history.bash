@@ -18,7 +18,7 @@ peco_history()
   local CMD=$(\history \
               | reverse_order \
               | eval ${trim_line_number} \
-              | eval ${unique} \
+              | unique \
               | peco --query "${READLINE_LINE}")
   READLINE_LINE="${CMD}"  # Input to terminal's readline
   READLINE_POINT=${#CMD}  # Set cursor

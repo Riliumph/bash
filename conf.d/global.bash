@@ -1,7 +1,5 @@
 ### global variable tools
 LAST_STATUS=0 # Initialize status code by 0
-# Attention to how to escape single-quotation
-unique='awk '\''!dictionary[$0]++'\''' # Need not sort -f unlike uniq command
 
 # Exsit shell variable
 if [[ ! -v CACHE ]]; then
