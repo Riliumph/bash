@@ -47,7 +47,7 @@ source "$BASH_ROOT/functions/seds.bash"
 source "$BASH_ROOT/functions/unique.bash"
 
 ### Bash options
-source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
+source "$BASH_ROOT/alias/${OS,,}.bash"
 
 ### Use alias
 source "$BASH_ROOT/functions/cd.bash"
@@ -56,5 +56,5 @@ if which peco &> /dev/null; then
 fi
 
 ### Use other setting
-source "$BASH_ROOT/scripts/bind/${OS,,}.bash"
+source "$BASH_ROOT/bind/${OS,,}.bash"
 
