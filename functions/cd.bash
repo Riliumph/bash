@@ -1,10 +1,3 @@
-CD_HISTORY=${CACHE}/cd_history.log
-
-# Check log file existance
-if [[ ! -f CD_HISTORY ]]; then
-  touch "${CD_HISTORY}"
-fi
-
 ###
 # Cutom cd Command
 #
