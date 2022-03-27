@@ -6,9 +6,8 @@ if which git &> /dev/null; then
     source /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh
   elif [ $PF = 'Linux' ]; then
     # Already installed in ubuntu
-    # /etc/profile.d/bash_completion.sh
-    # /etc/bash_completion.d/git-prompt
-    :
+    source /etc/profile.d/bash_completion.sh
+    source /etc/bash_completion.d/git-prompt
   fi
   #export GIT_PS1_SHOWUPSTREAM=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
