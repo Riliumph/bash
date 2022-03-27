@@ -36,17 +36,17 @@ for config in "${configs[@]}"; do
 done
 
 ### Config readline
-INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
+INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
 
 ### Config LS_COLOR
 if type dircolors &> /dev/null; then
-  COLORRC="$BASH_ROOT/conf.d/${OS,,}.colorrc"
+  COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
   eval $(dircolors "${COLORRC}")
 fi
 
 ### Config by environment
-source "$BASH_ROOT/alias/${OS,,}.bash"
-source "$BASH_ROOT/bind/${OS,,}.bash"
+source "$BASH_ROOT/alias/${PF,,}.bash"
+source "$BASH_ROOT/bind/${PF,,}.bash"
 
 # Execute
 CleanCdHistory

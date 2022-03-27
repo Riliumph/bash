@@ -9,7 +9,7 @@
 peco_history()
 {
   local trim_line_number
-  if [[ ${OS} == 'MacOS' ]]; then
+  if [[ ${PF} == 'MacOS' ]]; then
     trim_line_number='sed -Ee "s/^ +[0-9]+ +//"'
   else
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'

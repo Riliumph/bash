@@ -1,10 +1,10 @@
 ########## TERMINAL CODE ##########
 if which git &> /dev/null; then
-  if [ $OS = 'MacOS' ]; then
+  if [ $PF = 'MacOS' ]; then
     # homebrew
     source /usr/local/opt/git/etc/bash_completion.d/git-completion.bash
     source /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh
-  elif [ $OS = 'Linux' ]; then
+  elif [ $PF = 'Linux' ]; then
     # Already installed in ubuntu
     # /etc/profile.d/bash_completion.sh
     # /etc/bash_completion.d/git-prompt
