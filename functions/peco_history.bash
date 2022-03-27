@@ -2,7 +2,6 @@
 # peco_history
 #
 # search bash_history by peco
-# bind Ctrl + r
 # 1.Reverse order to reverse the time series
 # 2.Trim the line number
 # 3.Trim the duplication in history
@@ -24,5 +23,6 @@ peco_history()
   READLINE_POINT=${#CMD}  # Set cursor
 }
 
-bind -x '"\C-r": peco_history'
-
+if which peco &> /dev/null; then
+  bind -x '"\C-r": peco_history'
+fi

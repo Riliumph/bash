@@ -22,39 +22,31 @@ shopt -s dirspell          # complement by ignorring upper & lower case
 shopt -s extglob
 shopt -s globstar
 
-### Global variable
-source "$BASH_ROOT/conf.d/env.bash"
-source "$BASH_ROOT/conf.d/cache.bash"
-source "$BASH_ROOT/conf.d/global.bash"
-source "$BASH_ROOT/conf.d/history.bash"
-source "$BASH_ROOT/conf.d/prompt.bash"
-source "$BASH_ROOT/conf.d/completion.bash"
+### Function definition
+# Don't execute function yet
+func_definitions=($(find "$BASH_ROOT/functions" -name "*.bash" -type f))
+for func_definition in "${func_definitions[@]}"; do
+  source ${func_definition}
+done
 
-### readline config
+### Config bash
+configs=($(find "$BASH_ROOT/conf.d" -name "*.bash" -type f))
+for config in "${configs[@]}"; do
+  source ${config}
+done
+
+### Config readline
 INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
 
-### LS_COLOR config
+### Config LS_COLOR
 if type dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${OS,,}.colorrc"
   eval $(dircolors "${COLORRC}")
 fi
 
-### Function definition
-source "$BASH_ROOT/functions/date_time.bash"
-source "$BASH_ROOT/functions/order.bash"
-source "$BASH_ROOT/functions/path.bash"
-source "$BASH_ROOT/functions/seds.bash"
-source "$BASH_ROOT/functions/unique.bash"
-
-### Bash options
+### Config by environment
 source "$BASH_ROOT/alias/${OS,,}.bash"
-
-### Use alias
-source "$BASH_ROOT/functions/cd.bash"
-if which peco &> /dev/null; then
-  source "$BASH_ROOT/functions/peco_history.bash"
-fi
-
-### Use other setting
 source "$BASH_ROOT/bind/${OS,,}.bash"
 
+# Execute
+CleanCdHistory
