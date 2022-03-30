@@ -49,4 +49,5 @@ source "$BASH_ROOT/alias/${PF,,}.bash"
 source "$BASH_ROOT/bind/${PF,,}.bash"
 
 # Execute
+CleanHistory
 CleanCdHistory
