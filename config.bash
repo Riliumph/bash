@@ -22,31 +22,32 @@ shopt -s dirspell          # complement by ignorring upper & lower case
 shopt -s extglob
 shopt -s globstar
 
-### Global variable
-source "$BASH_ROOT/conf.d/env.bash"
-source "$BASH_ROOT/conf.d/global.bash"
-source "$BASH_ROOT/conf.d/history.bash"
-source "$BASH_ROOT/conf.d/prompt.bash"
-source "$BASH_ROOT/conf.d/completion.bash"
-
-### readline config
-INPUTRC="$BASH_ROOT/readline/${OS,,}.inputrc"
-
 ### Function definition
-source "$BASH_ROOT/functions/date_time.bash"
-source "$BASH_ROOT/functions/order.bash"
-source "$BASH_ROOT/functions/path.bash"
-source "$BASH_ROOT/functions/seds.bash"
+# Don't execute function yet
+func_definitions=($(find "$BASH_ROOT/functions" -name "*.bash" -type f))
+for func_definition in "${func_definitions[@]}"; do
+  source ${func_definition}
+done
 
-### Bash options
-source "$BASH_ROOT/scripts/alias/${OS,,}.bash"
+### Config bash
+configs=($(find "$BASH_ROOT/conf.d" -name "*.bash" -type f))
+for config in "${configs[@]}"; do
+  source ${config}
+done
 
-### Use alias
-source "$BASH_ROOT/functions/cd.bash"
-if which peco &> /dev/null; then
-  source "$BASH_ROOT/functions/peco_history.bash"
+### Config readline
+INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
+
+### Config LS_COLOR
+if type dircolors &> /dev/null; then
+  COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
+  eval $(dircolors "${COLORRC}")
 fi
 
-### Use other setting
-source "$BASH_ROOT/scripts/bind/${OS,,}.bash"
+### Config by environment
+source "$BASH_ROOT/alias/${PF,,}.bash"
+source "$BASH_ROOT/bind/${PF,,}.bash"
 
+# Execute
+CleanHistory
+CleanCdHistory

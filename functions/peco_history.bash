@@ -2,7 +2,6 @@
 # peco_history
 #
 # search bash_history by peco
-# bind Ctrl + r
 # 1.Reverse order to reverse the time series
 # 2.Trim the line number
 # 3.Trim the duplication in history
@@ -10,7 +9,7 @@
 peco_history()
 {
   local trim_line_number
-  if [[ ${OS} == 'MacOS' ]]; then
+  if [[ ${PF} == 'MacOS' ]]; then
     trim_line_number='sed -Ee "s/^ +[0-9]+ +//"'
   else
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
@@ -18,11 +17,12 @@ peco_history()
   local CMD=$(\history \
               | reverse_order \
               | eval ${trim_line_number} \
-              | eval ${unique} \
+              | unique \
               | peco --query "${READLINE_LINE}")
   READLINE_LINE="${CMD}"  # Input to terminal's readline
   READLINE_POINT=${#CMD}  # Set cursor
 }
 
-bind -x '"\C-r": peco_history'
-
+if which peco &> /dev/null; then
+  bind -x '"\C-r": peco_history'
+fi

@@ -1,10 +1,3 @@
-CD_HISTORY=${CACHE}/cd_history.log
-
-# Check log file existance
-if [[ ! -f CD_HISTORY ]]; then
-  touch "${CD_HISTORY}"
-fi
-
 ###
 # Cutom cd Command
 #
@@ -19,62 +12,43 @@ fi
 custom_cd()
 {
   local -r argc=$#
-  local destination=$*
   case ${argc} in
     0) if which peco &> /dev/null; then
          destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
        fi
        ;;
-    1) destination=$1
+    *) # Don't use "$@" to forget arguments' position info
+       # Join all positional parameters to support paths with half-width space
+       # After that, use this by enclosing in double quotation.
+       local destination="$*"
        ;;
   esac
 
   # History Option
-  if [[ ${destination} == '-' ]];then
+  if [[ "${destination}" == '-' ]];then
     if which peco &> /dev/null; then
-      destination=$(\cat ${CD_HISTORY} \
+      destination=$(\cat "${CD_HISTORY}" \
                   | reverse_order \
-                  | eval ${unique} \
+                  | unique \
                   | peco) # Cannot use --query option
     fi
   fi
 
   # Don't move $HOME
-  if [ -z $destination ]; then
+  if [ -z "${destination}" ]; then
     echo 'Missing args';
     return 1;
   fi
 
   # \cd => builtin cd
-  \cd ${destination}
+  \cd "${destination}"
   if [ $? -ne 0 ]; then
     return $?
   fi
   clear && ls
 
   # Log path history and Convert relative path to absolute path
-  pwd >> ${CD_HISTORY}
+  pwd >> "${CD_HISTORY}"
 }
 
 alias cd='custom_cd'
-
-###
-# _clean_history
-_clean_dir_history()
-{
-  # Read history file
-  local -r uniq_ary=($(cat ${CD_HISTORY} \
-                  | reverse_order \
-                  | eval $unique \
-                  | reverse_order))
-  \cp $CD_HISTORY $CD_HISTORY.bak &> /dev/null
-  :> ${CD_HISTORY} # truncate file
-  for line in "${uniq_ary[@]}"; do
-    if [[ -e $line ]]; then
-      echo $line >> ${CD_HISTORY}
-    fi
-  done
-}
-
-_clean_dir_history
-
