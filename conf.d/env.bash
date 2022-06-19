@@ -1,10 +1,10 @@
 ### Judge operation system
 if [ "$(uname)" == 'Darwin' ]; then
   PF='MacOS'
+elif [[ "$(uname -r)" == *microsoft* ]]; then
+  PF='WSL'
 elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   PF='Linux'
-elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
-  PF='Cygwin'
 else
   echo "Your platform ($(uname -a)) is not supported."
   exit 1

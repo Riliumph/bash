@@ -22,6 +22,9 @@ shopt -s dirspell          # complement by ignorring upper & lower case
 shopt -s extglob
 shopt -s globstar
 
+### Base Config
+source "./conf.d/env.bash"
+
 ### Function definition
 # Don't execute function yet
 func_definitions=($(find "$BASH_ROOT/functions" -name "*.bash" -type f))
@@ -30,7 +33,7 @@ for func_definition in "${func_definitions[@]}"; do
 done
 
 ### Config bash
-configs=($(find "$BASH_ROOT/conf.d" -name "*.bash" -type f))
+configs=($(find "$BASH_ROOT/conf.d" -name "*.bash" -type f | grep -v "env.sh"))
 for config in "${configs[@]}"; do
   source ${config}
 done

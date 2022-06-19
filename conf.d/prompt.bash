@@ -8,6 +8,10 @@ if which git &> /dev/null; then
     # Already installed in ubuntu
     source /etc/profile.d/bash_completion.sh
     source /etc/bash_completion.d/git-prompt
+  elif [ $PF = 'WSL' ]; then
+    # Already installed in wsl on ubuntu
+    source "/usr/share/bash-completion/completions/git"
+    source "/etc/bash_completion.d/git-prompt"
   fi
   #export GIT_PS1_SHOWUPSTREAM=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
