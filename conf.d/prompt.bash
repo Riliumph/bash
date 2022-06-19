@@ -1,18 +1,10 @@
 ########## TERMINAL CODE ##########
 if which git &> /dev/null; then
-  if [ $PF = 'MacOS' ]; then
-    # homebrew
-    source /usr/local/opt/git/etc/bash_completion.d/git-completion.bash
-    source /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh
-  elif [ $PF = 'Linux' ]; then
-    # Already installed in ubuntu
-    source /etc/profile.d/bash_completion.sh
-    source /etc/bash_completion.d/git-prompt
-  elif [ $PF = 'WSL' ]; then
-    # Already installed in wsl on ubuntu
-    source "/usr/share/bash-completion/completions/git"
-    source "/etc/bash_completion.d/git-prompt"
-  fi
+  case ${PF} in
+    MacOS) source /usr/local/opt/git/etc/bash_completion.d/git-prompt.sh;;
+    Linux) source /etc/bash_completion.d/git-prompt;;
+    WSL) source "/etc/bash_completion.d/git-prompt";;
+  esac
   #export GIT_PS1_SHOWUPSTREAM=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
   export GIT_PS1_SHOWSTASHSTATE=1
