@@ -23,7 +23,7 @@ shopt -s extglob
 shopt -s globstar
 
 ### Base Config
-source "./conf.d/env.bash"
+source "$BASH_ROOT/conf.d/env.bash"
 
 ### Function definition
 # Don't execute function yet
