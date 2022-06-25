@@ -1,1 +1,8 @@
-linux.colorrc
+# Attention
+# if you want other config, you could execute following command
+# $ dircolors -p
+
+# Compliant directory color
+STICKY_OTHER_WRITABLE 01;04;34 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 01;04;34 # dir that is other-writable (o+w) and not sticky
+STICKY 01;04;34 # dir with the sticky bit set (+t) and not other-writable
