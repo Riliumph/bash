@@ -3,17 +3,6 @@
 # It is only allowed for.bashell scripts with execution privileges.
 # set -u   Don't allow here
 
-if [[ ! -t 1 ]];then
-  echo "Cannot use stdout(fd 1)"
-  # Do not exe to avoid following error in scp
-  # bind: warning: line editing not enabled
-  return;
-fi
-
-if [[ ! -v BASH_ROOT ]];then
-  echo '$BASH_ROOT is undefined!!'
-  return 1
-fi
 
 ### bash secret power
 shopt -s expand_aliases    # for non-interactive shell
@@ -22,8 +11,11 @@ shopt -s dirspell          # complement by ignorring upper & lower case
 shopt -s extglob
 shopt -s globstar
 
-### Base Config
-source "$BASH_ROOT/conf.d/env.bash"
+### Check Requirement
+source "$BASH_ROOT/conf.d/require.bash"
+if [[ $? != 0 ]]; then
+  return 1
+fi
 
 ### Function definition
 # Don't execute function yet
