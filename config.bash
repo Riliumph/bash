@@ -24,6 +24,9 @@ shopt -s globstar
 
 ### Base Config
 source "$BASH_ROOT/conf.d/env.bash"
+if [[ $? != 0 ]]; then
+  return 1
+fi
 
 ### Function definition
 # Don't execute function yet

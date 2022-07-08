@@ -7,7 +7,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
   PF='Linux'
 else
   echo "Your platform ($(uname -a)) is not supported."
-  exit 1
+  return 1
 fi
 
 # Set up special command path
