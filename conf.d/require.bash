@@ -13,11 +13,13 @@ if [[ ! -v BASH_ROOT ]];then
 fi
 
 # Require: Support operation system
-if [ "$(uname)" == 'Darwin' ]; then
+if [[ "$(uname)" == 'Darwin' ]]; then
   PF='MacOS'
 elif [[ "$(uname -r)" == *microsoft* ]]; then
   PF='WSL'
-elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+elif [[ "$(uname)" == *MINGW64_NT* ]]; then
+  PF='Cygwin'
+elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
   PF='Linux'
 else
   echo "Your platform ($(uname -a)) is not supported."

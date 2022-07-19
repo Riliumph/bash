@@ -19,10 +19,26 @@ GetFaceStatus()
 
 ###
 # Prompt Factory
-# This expect to be used as embedding command enclosed double-quotes
+# Attention:
+# 1. This expect to be used as embedding command enclosed double-quotes
 # > Wrapping the tput output in \[ \] is recommended by the Bash man page.
 # > This helps Bash ignore non-printable characters so that it correctly calculates the size of the prompt.
 # > https://wiki.archlinux.org/title/Bash/Prompt_customization
+#
+# 2. Use $'\n' as escaped CRLF in Cygwin
+# ```bash
+# -bash: command substitution: line 1: syntax error near unexpected token `)'
+# -bash: command substitution: line 1: `__git_ps1)'
+# ```
+# - Workaround1: \n -> $'\n'
+#   Escape CRLF by following the notes in the QUOTING section of man bash.
+# - Workaround2: $(__git_ps1) -> `__git_ps1`
+#   Use back quotation instead of single-quotation
+# ```bash
+# $ man bash
+# Words of the form $'string' are treated specially.  The word expands to string, with backslash-escaped characters replaced as specified by the ANSI C standard.  of the form $'string' are treated specially.
+# ```
+
 PromptFactory()
 {
   local GIT_BRANCH=''
@@ -39,7 +55,8 @@ PromptFactory()
   local git="\[$(tput setaf 1)\]"  # red
   local ps1=""
   # Factory of Line 1
-  ps1+="${user}\u${norm}@${host}\h${norm}:${path}\w${norm}|${git}${GIT_BRANCH}\n"
+  # Use $'\n' as escaped CRLF in Cygwin
+  ps1+="${user}\u${norm}@${host}\h${norm}:${path}\w${norm}|${git}${GIT_BRANCH}"$'\n'
   # Factory of Line 2
   ps1+="${norm}${FACE}${norm} \$ "
   # Finalize PS1
