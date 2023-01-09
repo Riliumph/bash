@@ -40,12 +40,9 @@ custom_cd()
     return 1;
   fi
 
-  # \cd => builtin cd
-  \cd "${destination}"
-  local -r cd_status=$?
-  if [ ! ${cd_status} ]; then
-    return ${cd_status}
-  fi
+  # call builtin command to avoid recursive call
+  # builtin cd or \cd
+  builtin cd "${destination}" || return
   clear && ls
 
   # Log path history and Convert relative path to absolute path

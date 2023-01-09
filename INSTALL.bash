@@ -9,8 +9,10 @@ abs_dirname() {
 
   # Check path existence one by one
   while [ -n "$path" ]; do
-    cd "${path%/*}"  # Remove the shortest pattern(/*) from right
-    local name="${path##*/}"  # Remove the longest pattern(*/) from left
+    # Remove the shortest pattern(/*) from right
+    builtin cd "${path%/*}" || exit
+    # Remove the longest pattern(*/) from left
+    local name="${path##*/}"
     path="$(readlink "$name" || true)"
   done
 
