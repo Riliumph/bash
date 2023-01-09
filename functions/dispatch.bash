@@ -4,6 +4,6 @@
 # Use the dispatch function that wraps the process
 Dispatch()
 {
-  LAST_STATUS=$?
+  export LAST_STATUS=$?
   share_history
 }
