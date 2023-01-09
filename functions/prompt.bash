@@ -8,8 +8,8 @@ GetFaceStatus()
 {
   # If put escape sequence(\[,\]), display it
   # If don't put escape sequence, appear new line problem in terminal
-  local success="(*'_')<" # \[$(tput setaf 2)\]"
-  local failure="(*;_;)<" # \[$(tput setaf 1)\]"
+  local -r success="(*'_')<" # \[$(tput setaf 2)\]"
+  local -r failure="(*;_;)<" # \[$(tput setaf 1)\]"
   if [ "${LAST_STATUS}" -eq 0 ]; then
     printf "%s %3d" "${success}" "${LAST_STATUS}"
   else
@@ -38,7 +38,6 @@ GetFaceStatus()
 # $ man bash
 # Words of the form $'string' are treated specially.  The word expands to string, with backslash-escaped characters replaced as specified by the ANSI C standard.  of the form $'string' are treated specially.
 # ```
-
 PromptFactory()
 {
   local GIT_BRANCH=''
@@ -46,13 +45,13 @@ PromptFactory()
     # __git_ps1 need executing when PS1 is interpreted.
     GIT_BRANCH='$(__git_ps1)'
   fi
-  local FACE='$(GetFaceStatus)'
+  local -r FACE='$(GetFaceStatus)'
   # color
-  local norm="\[$(tput sgr0)\]"    # white
-  local host="\[$(tput setaf 2)\]" # green
-  local user="\[$(tput setaf 4)\]" # blue
-  local path="\[$(tput setaf 3)\]" # yellow
-  local git="\[$(tput setaf 1)\]"  # red
+  local -r norm="\[$(tput sgr0)\]"    # white
+  local -r host="\[$(tput setaf 2)\]" # green
+  local -r user="\[$(tput setaf 4)\]" # blue
+  local -r path="\[$(tput setaf 3)\]" # yellow
+  local -r git="\[$(tput setaf 1)\]"  # red
   local ps1=""
   # Factory of Line 1
   # Use $'\n' as escaped CRLF in Cygwin

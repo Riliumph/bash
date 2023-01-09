@@ -14,7 +14,7 @@ peco_history()
   else
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
   fi
-  local CMD=$(\history \
+  local -r CMD=$(\history \
               | reverse_order \
               | eval "${trim_line_number}" \
               | unique \
