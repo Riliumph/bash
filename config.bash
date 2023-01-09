@@ -25,7 +25,7 @@ INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
 if type dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
   if [ -e ${COLORRC} ];then
-    eval $(dircolors "${COLORRC}")
+    eval "$(dircolors "${COLORRC}")"
   fi
 fi
 
