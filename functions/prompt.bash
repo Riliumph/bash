@@ -10,10 +10,10 @@ GetFaceStatus()
   # If don't put escape sequence, appear new line problem in terminal
   local success="(*'_')<" # \[$(tput setaf 2)\]"
   local failure="(*;_;)<" # \[$(tput setaf 1)\]"
-  if [ ${LAST_STATUS} -eq 0 ]; then
-    printf "%s %3d" ${success} ${LAST_STATUS}
+  if [ "${LAST_STATUS}" -eq 0 ]; then
+    printf "%s %3d" "${success}" "${LAST_STATUS}"
   else
-    printf "%s %3d" ${failure} ${LAST_STATUS}
+    printf "%s %3d" "${failure}" "${LAST_STATUS}"
   fi
 }
 

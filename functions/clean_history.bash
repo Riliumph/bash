@@ -33,7 +33,7 @@ CleanCdHistory()
   \cp "${CD_HISTORY}" "${CD_HISTORY}.bak" &> /dev/null
   :> "${CD_HISTORY}" # truncate file
   for line in "${uniq_ary[@]}"; do
-    if [[ -e "${line}" ]]; then
+    if [[ -e ${line} ]]; then
       echo "${line}" >> "${CD_HISTORY}"
     fi
   done

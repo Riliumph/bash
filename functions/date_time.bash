@@ -14,7 +14,7 @@ date_time()
     *)echo 'Too many argument for date_time command';
       return 1;;
   esac
-  format=$(echo ${format}|
+  format=$(echo "${format}"|
     sed -e 's/yyyy/%Y/g' | sed -e 's/yy/%y/g'     | sed -e 's/y/%-y/g' |
     sed -e 's/MMMM/%B/g' | sed -e 's/MMM/%b/g'    | sed -e 's/MM/%m/g' | sed -e 's/(^%)M/%-m/g' |
     sed -e 's/dddd/%A/g' | sed -e 's/ddd/%a/g'    |

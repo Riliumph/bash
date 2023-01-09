@@ -20,5 +20,5 @@ abs_dirname() {
 installed_path=$(abs_dirname "$0")
 
 # Add bash setting for vim to bashrc
-echo "export BASH_ROOT=$installed_path" >> $HOME/.bashrc
-echo 'source $BASH_ROOT/config.bash' >> $HOME/.bashrc
+echo "export BASH_ROOT=${installed_path}" >> "$HOME/.bashrc"
+echo 'source $BASH_ROOT/config.bash' >> "$HOME/.bashrc"

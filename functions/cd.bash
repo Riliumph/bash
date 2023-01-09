@@ -11,7 +11,7 @@
 #    Show path-history you have moved by peco
 custom_cd()
 {
-  local -r argc=$#
+  local -r argc="$#"
   case ${argc} in
     0) if which peco &> /dev/null; then
          destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
@@ -43,8 +43,8 @@ custom_cd()
   # \cd => builtin cd
   \cd "${destination}"
   local -r cd_status=$?
-  if [ ! $cd_status ]; then
-    return $cd_status
+  if [ ! ${cd_status} ]; then
+    return ${cd_status}
   fi
   clear && ls
 

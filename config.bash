@@ -8,14 +8,14 @@ fi
 mapfile -d $'\0' func_definitions < <(find "$BASH_ROOT/functions" -name "*.bash" -type f -print0)
 for func_definition in "${func_definitions[@]}"; do
   # echo "loading ${func_definition}"
-  source ${func_definition}
+  source "${func_definition}"
 done
 
 ### Config bash
 mapfile -d $'\0' configs < <(find "$BASH_ROOT/conf.d" -name "*.bash" -type f -print0)
 for config in "${configs[@]}"; do
   # echo "loading ${config}"
-  source ${config}
+  source "${config}"
 done
 
 ### Config readline
@@ -24,7 +24,7 @@ INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
 ### Config LS_COLOR
 if type dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
-  if [ -e ${COLORRC} ];then
+  if [ -e "${COLORRC}" ];then
     eval "$(dircolors "${COLORRC}")"
   fi
 fi
