@@ -19,7 +19,7 @@ elif [[ "$(uname -r)" == *microsoft* ]]; then
   PF='WSL'
 elif [[ "$(uname)" == *MINGW64_NT* ]]; then
   PF='Cygwin'
-elif [[ "$(expr substr "$(uname -s)" 1 5)" == 'Linux' ]]; then
+elif [[ "$(uname -s | cut -c1-5)" == 'Linux' ]]; then
   PF='Linux'
 else
   echo "Your platform ($(uname -a)) is not supported."
