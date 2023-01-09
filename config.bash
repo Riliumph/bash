@@ -6,14 +6,16 @@ fi
 
 ### Function definition
 # Don't execute function yet
-func_definitions=($(find "$BASH_ROOT/functions" -name "*.bash" -type f))
+mapfile -d $'\0' func_definitions < <(find "$BASH_ROOT/functions" -name "*.bash" -type f -print0)
 for func_definition in "${func_definitions[@]}"; do
+  # echo "loading ${func_definition}"
   source ${func_definition}
 done
 
 ### Config bash
-configs=($(find "$BASH_ROOT/conf.d" -name "*.bash" -type f | grep -v "env.sh"))
+mapfile -d $'\0' configs < <(find "$BASH_ROOT/conf.d" -name "*.bash" -type f -print0)
 for config in "${configs[@]}"; do
+  # echo "loading ${config}"
   source ${config}
 done
 
