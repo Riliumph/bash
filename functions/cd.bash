@@ -42,8 +42,9 @@ custom_cd()
 
   # \cd => builtin cd
   \cd "${destination}"
-  if [ $? -ne 0 ]; then
-    return $?
+  local -r cd_status=$?
+  if [ ! $cd_status ]; then
+    return $cd_status
   fi
   clear && ls
 

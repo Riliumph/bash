@@ -1,6 +1,5 @@
 ### Check Requirement
-source "$BASH_ROOT/conf.d/require.bash"
-if [[ $? != 0 ]]; then
+if ! source "$BASH_ROOT/conf.d/require.bash"; then
   return 1
 fi
 
