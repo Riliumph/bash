@@ -1,33 +1,21 @@
-########## ATTENTION ##########
-# It prohibits using "set -u" to detect that a variable is undefined.
-# It is only allowed for.bashell scripts with execution privileges.
-# set -u   Don't allow here
-
-
-### bash secret power
-shopt -s expand_aliases    # for non-interactive shell
-shopt -s cdspell           # estimate spell miss
-shopt -s dirspell          # complement by ignorring upper & lower case
-shopt -s extglob
-shopt -s globstar
-
 ### Check Requirement
-source "$BASH_ROOT/conf.d/require.bash"
-if [[ $? != 0 ]]; then
+if ! source "$BASH_ROOT/conf.d/require.bash"; then
   return 1
 fi
 
 ### Function definition
 # Don't execute function yet
-func_definitions=($(find "$BASH_ROOT/functions" -name "*.bash" -type f))
+mapfile -d $'\0' func_definitions < <(find "$BASH_ROOT/functions" -name "*.bash" -type f -print0)
 for func_definition in "${func_definitions[@]}"; do
-  source ${func_definition}
+  # echo "loading ${func_definition}"
+  source "${func_definition}"
 done
 
 ### Config bash
-configs=($(find "$BASH_ROOT/conf.d" -name "*.bash" -type f | grep -v "env.sh"))
+mapfile -d $'\0' configs < <(find "$BASH_ROOT/conf.d" -name "*.bash" -type f -print0)
 for config in "${configs[@]}"; do
-  source ${config}
+  # echo "loading ${config}"
+  source "${config}"
 done
 
 ### Config readline
@@ -36,12 +24,14 @@ INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
 ### Config LS_COLOR
 if type dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
-  eval $(dircolors "${COLORRC}")
+  if [ -e "${COLORRC}" ]; then
+    eval "$(dircolors "${COLORRC}")"
+  fi
 fi
 
 ### Config by environment
-source "$BASH_ROOT/alias/${PF,,}.bash"
-source "$BASH_ROOT/bind/${PF,,}.bash"
+source "$BASH_ROOT/alias/${PF,,}.bash" &> /dev/null
+source "$BASH_ROOT/bind/${PF,,}.bash" &> /dev/null
 
 # Execute
 CleanHistory

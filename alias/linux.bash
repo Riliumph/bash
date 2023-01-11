@@ -43,4 +43,3 @@ alias less='less -gMNRqW'
 alias unpatch='patch -R'
 alias targz='tar cfvz'
 alias untargz='tar xfvz'
-

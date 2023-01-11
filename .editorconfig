@@ -1,0 +1,9 @@
+[*.bash]
+indent_style = space
+indent_size  = 2
+shell_variant      = bash
+binary_next_line   = true # Align top with operator
+function_next_line = true # Align top with brace
+space_redirects    = true # space after redirection
+switch_case_indent = true
+keep_padding       = false
