@@ -8,7 +8,7 @@ CleanHistory()
   # Read history file
   mapfile -t uniq_ary < <(reverse_order "${HISTFILE}" | unique | reverse_order)
   \cp "${HISTFILE}" "${HISTFILE}.bak" &> /dev/null
-  :> "${HISTFILE}" # truncate file
+  : > "${HISTFILE}" # truncate file
   for line in "${uniq_ary[@]}"; do
     echo "${line}" >> "${HISTFILE}"
   done
@@ -25,7 +25,7 @@ CleanCdHistory()
   # Read history file
   mapfile -t uniq_ary < <(reverse_order "${CD_HISTORY}" | unique | reverse_order)
   \cp "${CD_HISTORY}" "${CD_HISTORY}.bak" &> /dev/null
-  :> "${CD_HISTORY}" # truncate file
+  : > "${CD_HISTORY}" # truncate file
   for line in "${uniq_ary[@]}"; do
     if [[ -e ${line} ]]; then
       echo "${line}" >> "${CD_HISTORY}"

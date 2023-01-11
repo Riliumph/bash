@@ -4,7 +4,8 @@
 # Convert to absolute path
 # @param $1 path
 # @return absolute path
-abs_dirname() {
+abs_dirname()
+{
   local path="$1"
 
   # Check path existence one by one
@@ -16,7 +17,7 @@ abs_dirname() {
     path="$(readlink "$name" || true)"
   done
 
-  pwd -P  # return string
+  pwd -P # return string
 }
 
 installed_path=$(abs_dirname "$0")
