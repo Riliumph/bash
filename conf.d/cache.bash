@@ -6,7 +6,7 @@ if [[ ! -v CACHE ]]; then
 fi
 
 # Check log directory existance
-if [[ ! -d CACHE ]];then
+if [[ ! -d CACHE ]]; then
   mkdir -p "${CACHE}"
 fi
 

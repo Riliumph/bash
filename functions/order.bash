@@ -3,9 +3,9 @@ asc_order()
   declare argv
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-      mapfile -t argv < <(cat -)
+    mapfile -t argv < <(cat -)
   else
-      mapfile -t argv < "$1"
+    mapfile -t argv < "$1"
   fi
   # Check tool
   declare tool

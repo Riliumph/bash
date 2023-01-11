@@ -15,12 +15,12 @@ peco_history()
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
   fi
   local -r CMD=$(\history \
-              | reverse_order \
-              | eval "${trim_line_number}" \
-              | unique \
-              | peco --query "${READLINE_LINE}")
-  READLINE_LINE=${CMD}  # Input to terminal's readline
-  READLINE_POINT=${#CMD}  # Set cursor
+    | reverse_order \
+    | eval "${trim_line_number}" \
+    | unique \
+    | peco --query "${READLINE_LINE}")
+  READLINE_LINE=${CMD}   # Input to terminal's readline
+  READLINE_POINT=${#CMD} # Set cursor
 }
 
 if which peco &> /dev/null; then

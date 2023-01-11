@@ -6,4 +6,3 @@ fi
 if type peco &> /dev/null; then
   bind '"\e[1;3B":"\ercd\n"'
 fi
-
