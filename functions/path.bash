@@ -4,7 +4,7 @@
 # Display path environment value human readably
 path()
 {
-  echo ${PATH} | tr ":" "\\n"
+  echo "${PATH}" | tr ":" "\\n"
 }
 
 get_filename()

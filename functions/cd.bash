@@ -11,7 +11,7 @@
 #    Show path-history you have moved by peco
 custom_cd()
 {
-  local -r argc=$#
+  local -r argc="$#"
   case ${argc} in
     0) if which peco &> /dev/null; then
          destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
@@ -40,11 +40,9 @@ custom_cd()
     return 1;
   fi
 
-  # \cd => builtin cd
-  \cd "${destination}"
-  if [ $? -ne 0 ]; then
-    return $?
-  fi
+  # call builtin command to avoid recursive call
+  # builtin cd or \cd
+  builtin cd "${destination}" || return
   clear && ls
 
   # Log path history and Convert relative path to absolute path

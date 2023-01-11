@@ -14,13 +14,13 @@ fi
 
 # Require: Support operation system
 if [[ "$(uname)" == 'Darwin' ]]; then
-  PF='MacOS'
+  export PF='MacOS'
 elif [[ "$(uname -r)" == *microsoft* ]]; then
-  PF='WSL'
+  export PF='WSL'
 elif [[ "$(uname)" == *MINGW64_NT* ]]; then
-  PF='Cygwin'
-elif [[ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]]; then
-  PF='Linux'
+  export PF='Cygwin'
+elif [[ "$(uname -s | cut -c1-5)" == 'Linux' ]]; then
+  export PF='Linux'
 else
   echo "Your platform ($(uname -a)) is not supported."
   return 1

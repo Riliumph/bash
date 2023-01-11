@@ -18,7 +18,7 @@ open()
     echo "  open ."
     return 1;
   fi
-  if [ ! -e $1 ]; then
+  if [ ! -e "$1" ]; then
     echo "open: $1 : No such file or directory"
     return 1;
   fi
