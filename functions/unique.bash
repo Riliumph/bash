@@ -1,19 +1,15 @@
 unique()
 {
-  local argv=$@
+  declare argv
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-    if [[ "${argv}" == "" ]]; then
-      argv=$(cat -)
-    fi
+    mapfile -t argv < <(cat -)
+  else
+    mapfile -t argv < "$1"
   fi
   # main process
   # Attention to how to escape single-quotation
+  uniq='awk '\''!dictionary[$0]++'\'
   # Need not sort -f unlike uniq command
-  uniq='awk '\''!dictionary[$0]++'\'''
-  if type eval &> /dev/null; then
-    echo "${argv}" | eval "${uniq}"
-  else
-    echo "${argv}" | awk '!dictionary[$0]++'
-  fi
+  printf "%s\n" "${argv[@]}" | eval "${uniq}"
 }
