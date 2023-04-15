@@ -57,7 +57,7 @@ bash: command substitution: line 1: `__git_ps1)'
 - Linuxでは発生しない
 
 明らかにmsys側（Giw for Windows含む）の問題である。  
-どうやら、Cygwin独自の`igncr`オプションが有効な時に「`$PS1`内で`$(command)`形式のコマンド置換の後に`\n`が続く」と構文解析に失敗刷る模様。
+どうやら、Cygwin独自の`igncr`オプションが有効な時に「`$PS1`内で`$(command)`形式のコマンド置換の後に`\n`が続く」と構文解析に失敗する模様。
 
 > `igncr`オプションが設定されている場合、CRLFの文字コードのCRを無視する挙動を取る。
 
