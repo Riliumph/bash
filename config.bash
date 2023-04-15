@@ -7,21 +7,24 @@ fi
 # Don't execute function yet
 mapfile -d $'\0' func_definitions < <(find "$BASH_ROOT/functions" -name "*.bash" -type f -print0)
 for func_definition in "${func_definitions[@]}"; do
-  # echo "loading ${func_definition}"
+  # echo "source ${func_definition}"
   source "${func_definition}"
 done
 
-### Config bash
-mapfile -d $'\0' configs < <(find "$BASH_ROOT/conf.d" -name "*.bash" -type f -print0)
-for config in "${configs[@]}"; do
-  # echo "loading ${config}"
-  source "${config}"
-done
-
-### Config readline
+### Config
+# bash 
+source $BASH_ROOT/conf.d/shelloption.bash
+source $BASH_ROOT/conf.d/stty.bash
+source $BASH_ROOT/conf.d/completion.bash
+source $BASH_ROOT/conf.d/global.bash
+source $BASH_ROOT/conf.d/lang.bash
+source $BASH_ROOT/conf.d/path.bash
+source $BASH_ROOT/conf.d/prompt.bash
+source $BASH_ROOT/conf.d/cache.bash
+source $BASH_ROOT/conf.d/history.bash
+# readline
 INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
-
-### Config LS_COLOR
+# LS_COLOR
 if type dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
   if [ -e "${COLORRC}" ]; then
