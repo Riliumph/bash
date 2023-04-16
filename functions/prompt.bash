@@ -36,7 +36,7 @@ PromptFactory()
   local ps1=""
   # Factory of Line 1
   # Use $'\n' as escaped CRLF in Cygwin enabled igncr option
-  ps1+="${user}\u${norm}@${host}\h${norm}:${path}\w${norm}|${git}${GIT_BRANCH}"$'\n'
+  ps1+="[\t]${user}\u${norm}@${host}\h${norm}:${path}\w${norm}|${git}${GIT_BRANCH}"$'\n'
   # Factory of Line 2
   ps1+="${norm}${FACE}${norm} \$ "
   # Finalize PS1
