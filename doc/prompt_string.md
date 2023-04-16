@@ -29,3 +29,11 @@ PS1に色を付けたい場合、二通りのやり方がある。
 評価されるためコマンドを書いておけばそれが実行される。
 
 汎用性のために専用の関数を用意しておくことでワンライナーでは記述しにくい複雑な処理も実行できる。
+
+## debian_chrootってなんだ？
+
+> - 参考
+>   - [What does "${debian_chroot:+($debian_chroot)}" do in my terminal prompt?](https://askubuntu.com/questions/372849/what-does-debian-chrootdebian-chroot-do-in-my-terminal-prompt)
+
+debian distributionにおいて、`chroot`コマンドでルートディレクトリを変更した場合にだけ表示される。
+
