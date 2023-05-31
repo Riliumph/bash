@@ -4,3 +4,9 @@ share_history()
   history -c # Clear local history in terminal
   history -r # Reload history from bash_history
 }
+
+reload_history()
+{
+  history -c
+  history -r
+}
