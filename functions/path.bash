@@ -21,3 +21,9 @@ get_directory()
 {
   echo "${1%/*}"
 }
+
+path_unique()
+{
+  path=$(echo -n ${PATH} | tr ":" "\\n" | unique | tr "\\n" ":")
+  echo "${path%:}" # remove last colon(:)
+}
