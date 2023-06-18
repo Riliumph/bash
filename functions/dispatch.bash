@@ -5,9 +5,5 @@
 Dispatch()
 {
   export LAST_STATUS=$?
-  if [[ $LAST_STATUS == 0 ]]; then
-    share_history
-  else
-    reload_history
-  fi
+  control_history ${LAST_STATUS}
 }

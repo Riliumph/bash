@@ -12,7 +12,7 @@ for func_definition in "${func_definitions[@]}"; do
 done
 
 ### Config
-# bash 
+# bash
 source $BASH_ROOT/conf.d/shelloption.bash
 source $BASH_ROOT/conf.d/stty.bash
 source $BASH_ROOT/conf.d/completion.bash
