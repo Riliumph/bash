@@ -37,5 +37,4 @@ source "$BASH_ROOT/alias/${PF,,}.bash" &> /dev/null
 source "$BASH_ROOT/bind/${PF,,}.bash" &> /dev/null
 
 # Execute
-CleanHistory
 CleanCdHistory
