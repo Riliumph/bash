@@ -25,7 +25,8 @@ control_history()
   fi
 
   case ${status} in
-    127) reload_history ;; # command not found
+    16) reload_history ;;
+    127) reload_history ;;
     *) share_history ;;
   esac
   return 0
