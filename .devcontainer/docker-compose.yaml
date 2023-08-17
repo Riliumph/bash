@@ -1,0 +1,14 @@
+version: "3"
+services:
+  dev:
+    container_name: builder
+    build:
+      context: ../
+      dockerfile: .devcontainer/dev.dockerfile
+    hostname: builder
+    volumes:
+      - type: bind
+        source: ../
+        target: /workspace/bash
+    stdin_open: true
+    tty: true
