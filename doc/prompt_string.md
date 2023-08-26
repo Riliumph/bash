@@ -22,7 +22,6 @@ PS1に色を付けたい場合、二通りのやり方がある。
 > [Bash/プロンプトのカスタマイズ](https://wiki.archlinux.org/title/Bash/Prompt_customization)  
 > 置換される関数の中で terminfo/ANSI のエスケープシーケンスを使うことはできますが Bash のエスケープを使うことはできません。特に \[ \] で出力不可能な文字列を囲んでも機能しません。代わりに8進数のエスケープ \001 や \002 を使ってください (例えば printf や echo -e を使用する場合)。
 
-
 ## PROMPT_STRING
 
 コマンドが実行されて結果が返り、PS1が表示される前に評価される環境変数。  
@@ -36,4 +35,3 @@ PS1に色を付けたい場合、二通りのやり方がある。
 >   - [What does "${debian_chroot:+($debian_chroot)}" do in my terminal prompt?](https://askubuntu.com/questions/372849/what-does-debian-chrootdebian-chroot-do-in-my-terminal-prompt)
 
 debian distributionにおいて、`chroot`コマンドでルートディレクトリを変更した場合にだけ表示される。
-
