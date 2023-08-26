@@ -4,5 +4,8 @@
     "SC1091",
     "SC2016"
   ],
-  "shellformat.useEditorConfig": true
+  "shellformat.useEditorConfig": true,
+  "shellformat.effectLanguages": [
+    "shellscript"
+  ]
 }
