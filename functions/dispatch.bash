@@ -5,5 +5,5 @@
 Dispatch()
 {
   export LAST_STATUS=$?
-  share_history
+  control_history ${LAST_STATUS}
 }

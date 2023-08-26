@@ -8,7 +8,7 @@ This is custom shell configure
 
 ```terminal
 $ cd bash
-$ sudo ./Install.bash
+$ sudo ./INSTALL.bash
 ```
 
 ## Develop environment
@@ -18,15 +18,30 @@ $ sudo apt install shellcheck
 $ go install github.com/mvdan/sh/cmd/shfmt@latest
 ```
 
+## How to develop
+
+- Use devcontainer or docker build .devcontainer
+- dive container
+- execute `./INSTALL.bash`
+- execute `bash`
+
 ## Directory Tree
 
 ```bash
 bash/
-├── alias/      # command alias settings by OS
-├── bind/       # key bind settings by OS
-├── cache/      # cache directory managed by ${CACHE}
-├── conf.d/     # setting files e.g. status variables
-├── functions/  # function definitions
-├── readline/   # readline settings
-└── config.bash # load above files as main method
+├── doc/         # documents and hints
+├── alias/       # command alias settings by OS
+├── bind/        # key bind settings by OS
+├── cache/       # cache directory managed by ${CACHE}
+├── conf.d/      # setting files e.g. status variables
+├── functions/   # function definitions
+├── readline/    # readline settings
+├── config.bash  # load above files as main method
+├── .editconfig  # format style rule for EditConfig
+└── INSTALL.bash # install script
 ```
+
+## Used Tool
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [EditorConfig](https://editorconfig.org/)
