@@ -1,11 +1,6 @@
 ########## TERMINAL CODE ##########
 if which git &> /dev/null; then
-  case ${PF} in
-    MacOS) source "/usr/local/opt/git/etc/bash_completion.d/git-prompt.sh" ;;
-    Linux) source "/etc/bash_completion.d/git-prompt" ;;
-    WSL) source "/etc/bash_completion.d/git-prompt" ;;
-    Cygwin) source "/etc/profile.d/git-prompt.sh" ;;
-  esac
+  LoadGitFiles
   #export GIT_PS1_SHOWUPSTREAM=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
   export GIT_PS1_SHOWSTASHSTATE=1
