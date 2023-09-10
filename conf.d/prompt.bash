@@ -20,4 +20,3 @@ ps1="$(PromptFactory)" || {
   exit
 }
 export PS1=${ps1}
-export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'

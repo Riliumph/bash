@@ -1,3 +1,7 @@
+# DEBUG flag
+# set -x
+# export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
+
 ### Check Requirement
 if ! source "$BASH_ROOT/conf.d/require.bash"; then
   return 1
