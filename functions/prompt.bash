@@ -28,11 +28,11 @@ PromptFactory()
   fi
   local -r FACE='$(GetFaceStatus)'
   # color
-  local -r norm="\[$(tput sgr0)\]"    # white
-  local -r host="\[$(tput setaf 2)\]" # green
-  local -r user="\[$(tput setaf 4)\]" # blue
-  local -r path="\[$(tput setaf 3)\]" # yellow
-  local -r git="\[$(tput setaf 1)\]"  # red
+  local -r norm="\[\e[0m\]"  # white
+  local -r host="\[\e[32m\]" # green
+  local -r user="\[\e[34m\]" # blue
+  local -r path="\[\e[33m\]" # yellow
+  local -r git="\[\e[31m\]"  # red
   local ps1=""
   # Factory of Line 1
   # Use $'\n' as escaped CRLF in Cygwin enabled igncr option
