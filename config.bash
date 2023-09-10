@@ -11,6 +11,10 @@ for func_definition in "${func_definitions[@]}"; do
   source "${func_definition}"
 done
 
+if ! eval "$(IsAvailable)" &> /dev/null; then
+  return 1
+fi
+
 ### Config
 # bash
 source $BASH_ROOT/conf.d/shelloption.bash
