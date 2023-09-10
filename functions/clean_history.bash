@@ -8,10 +8,7 @@ CleanHistory()
   # Read history file
   mapfile -t uniq_ary < <(reverse_order "${HISTFILE}" | remove_trailingspace | unique | reverse_order)
   \cp "${HISTFILE}" "${HISTFILE}.bak" &> /dev/null
-  : > "${HISTFILE}" # truncate file
-  for line in "${uniq_ary[@]}"; do
-    echo "${line}" >> "${HISTFILE}"
-  done
+  echo "${uniq_ary[*]}" > ${HISTFILE}
   IFS="${OLD_IFS}"
 }
 
