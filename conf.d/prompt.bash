@@ -15,8 +15,4 @@ fi
 # Enclose in single quotes for dynamic operation
 export PROMPT_COMMAND='Dispatch'
 # Enclose in double quotes for static operation
-ps1="$(PromptFactory)" || {
-  echo "fail to make prompt"
-  exit
-}
-export PS1=${ps1}
+SetPrompt

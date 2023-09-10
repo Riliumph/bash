@@ -42,3 +42,9 @@ PromptFactory()
   # Finalize PS1
   echo "${ps1}"
 }
+
+SetPrompt()
+{
+  ps1="$(PromptFactory)"
+  export PS1="${ps1}"
+}
