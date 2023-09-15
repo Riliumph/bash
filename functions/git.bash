@@ -6,12 +6,21 @@ GIT_FILE_LOCATION+=("/etc/bash_completion.d") # for ubuntu
 LoadGitFiles()
 {
   if [ -e "${GIT_LOCAL}/git-prompt.sh" ]; then
+    # echo "Loding git-prompt.sh ..."
     source "${GIT_LOCAL}/git-prompt.sh"
   elif [ -e "${GIT_LOCAL}/git-prompt" ]; then
+    # echo "Loding git-prompt ..."
     source "${GIT_LOCAL}/git-prompt"
+  else
+    echo "not found git-prompt"
   fi
   if [ -e "${GIT_LOCAL}/git-completion.bash" ]; then
+    # echo "Loding git-completion.bash ..."
     source "${GIT_LOCAL}/git-completion.bash"
+  else
+    echo "not found git-completion"
+  fi
+}
 
 InstallGitPrompt()
 {
