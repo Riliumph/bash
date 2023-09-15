@@ -1,3 +1,7 @@
+# DEBUG flag
+# set -x
+# export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
+
 ### Check Requirement
 if ! source "$BASH_ROOT/conf.d/require.bash"; then
   return 1
@@ -10,6 +14,10 @@ for func_definition in "${func_definitions[@]}"; do
   # echo "source ${func_definition}"
   source "${func_definition}"
 done
+
+if ! eval "$(IsAvailable)" &> /dev/null; then
+  return 1
+fi
 
 ### Config
 # bash
