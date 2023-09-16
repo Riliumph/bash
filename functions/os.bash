@@ -22,12 +22,12 @@ judge_os()
 
 IsAvailable()
 {
+  export PF=""
   PF=$(judge_os)
   exit_code=$?
-  if [ ${exit_code} -ne 0 ]; then
+  if [ "${exit_code}" -ne 0 ]; then
     echo "not support platform"
     return 1
   fi
-  export PF
   return 0
 }
