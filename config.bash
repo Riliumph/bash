@@ -41,8 +41,8 @@ if type dircolors &> /dev/null; then
 fi
 
 ### Config by environment
-source "$BASH_ROOT/alias/${PF,,}.bash" &> /dev/null
-source "$BASH_ROOT/bind/${PF,,}.bash" &> /dev/null
+source "$BASH_ROOT/alias/${PF,,}.bash"
+source "$BASH_ROOT/bind/${PF,,}.bash"
 
 # Execute
 CleanCdHistory
