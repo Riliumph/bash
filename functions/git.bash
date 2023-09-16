@@ -28,12 +28,17 @@ InstallGitPrompt()
   # Search git prompt
   mapfile -t gitprompts < <(find "${GIT_FILE_LOCATION[@]}" -type f -name "git-prompt*" 2> /dev/null)
   if (("${#gitprompts[@]}" == 0)); then
-    # Download mode
-    local -r from="https://raw.githubusercontent.com/git/git/master/contrib/completion"
-    curl -o "${GIT_LOCAL}/git-prompt.sh" "${from}/git-prompt.sh"
+    echo "Download mode"
+    local -r from="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh"
+    local -r to="${GIT_LOCAL}/git-prompt.sh"
+    printf "installing ...\n %s\n -> %s\n" "${from}" "${to}"
+    curl -o "${to}" "${from}"
   else
-    # local copy mode
-    cp -f "${gitprompts[0]}" "${GIT_LOCAL}/git-prompt.sh"
+    echo "Local copy mode"
+    local -r from="${gitprompts[0]}"
+    local -r to="${GIT_LOCAL}/git-prompt.sh"
+    printf "installing ...\n %s\n -> %s\n" "${from}" "${to}"
+    cp -f "${from}" "${to}"
   fi
 }
 
@@ -43,11 +48,16 @@ InstallGitCompletion()
   # Search git prompt
   mapfile -t gitprompts < <(find "${GIT_FILE_LOCATION[@]}" -type f -name "git-completion.bash" 2> /dev/null)
   if (("${#gitprompts[@]}" == 0)); then
-    # Download mode
-    local -r from="https://raw.githubusercontent.com/git/git/master/contrib/completion"
-    curl -o "${GIT_LOCAL}/git-completion.bash" "${from}/git-completion.bash" 2> /dev/null
+    echo "Download mode"
+    local -r from="https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash"
+    local -r to="${GIT_LOCAL}/git-completion.bash"
+    printf "installing ...\n %s\n -> %s\n" "${from}" "${to}"
+    curl -o "${to}" "${from}"
   else
-    # local copy mode
-    cp -f "${gitprompts[0]}" "${GIT_LOCAL}/git-completion.bash"
+    echo "Local copy mode"
+    local -r from="${gitprompts[0]}"
+    local -r to="${GIT_LOCAL}/git-completion.bash"
+    printf "installing ...\n %s\n -> %s\n" "${from}" "${to}"
+    cp -f "${from}" "${to}"
   fi
 }
