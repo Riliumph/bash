@@ -1,0 +1,5 @@
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/Riliumph/bash.wiki.git
+	branch = master
+	ignore = all
