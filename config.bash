@@ -15,7 +15,7 @@ for func_definition in "${func_definitions[@]}"; do
   source "${func_definition}"
 done
 
-if ! eval "$(IsAvailable)" &> /dev/null; then
+if ! IsAvailable; then
   return 1
 fi
 
