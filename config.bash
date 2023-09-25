@@ -27,6 +27,7 @@ source $BASH_ROOT/conf.d/completion.bash
 source $BASH_ROOT/conf.d/global.bash
 source $BASH_ROOT/conf.d/lang.bash
 source $BASH_ROOT/conf.d/path.bash
+source $BASH_ROOT/conf.d/git.bash
 source $BASH_ROOT/conf.d/prompt.bash
 source $BASH_ROOT/conf.d/cache.bash
 source $BASH_ROOT/conf.d/history.bash

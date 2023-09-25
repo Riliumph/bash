@@ -9,8 +9,12 @@ this_file=$(realpath "$0")
 BASH_ROOT="${this_file%/*}" # var name must be BASH_ROOT
 if [ -n "${BASH_ROOT}" ]; then
   # use BASH_ROOT in git.bash
-  if ! source "./functions/git.bash"; then
-    echo "fail to load git script"
+  if ! source "$BASH_ROOT/conf.d/git.bash"; then
+    echo "fail to load $BASH_ROOT/conf.d/git.bash"
+    exit 1
+  fi
+  if ! source "$BASH_ROOT/functions/git.bash"; then
+    echo "fail to load $BASH_ROOT/functions/git.bash"
     exit 1
   fi
 else
