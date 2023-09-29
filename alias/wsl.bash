@@ -2,6 +2,9 @@
 alias refresh='source $HOME/.bashrc && echo "Refresh Bash"'
 alias version='echo "bash versions: ${BASH_VERSION}"'
 
+# Reflect Root
+alias sudo='sudo '
+
 # File & Directory operation
 if which trash &> /dev/null; then
   alias rm='trash-put'
