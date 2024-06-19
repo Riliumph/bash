@@ -31,8 +31,7 @@ fi
 if which htop &> /dev/null; then
   alias top='htop'
 fi
-alias df='df -h'
-alias du='du -h'
+
 alias printenv='printenv | sort -f'
 alias less='less -gMNRqW'
 

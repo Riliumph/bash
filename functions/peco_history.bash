@@ -1,12 +1,12 @@
 ###
-# peco_history
+# PecoHistory
 #
 # search bash_history by peco
 # 1.Reverse order to reverse the time series
 # 2.Trim the line number
 # 3.Trim the duplication in history
 # 4.Pipe to peco
-peco_history()
+PecoHistory()
 {
   local trim_line_number
   if [[ ${PF} == 'MacOS' ]]; then
@@ -24,5 +24,5 @@ peco_history()
 }
 
 if which peco &> /dev/null; then
-  bind -x '"\C-r": peco_history'
+  bind -x '"\C-r": PecoHistory'
 fi
