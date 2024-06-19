@@ -1,4 +1,4 @@
-share_history()
+ShareHistory()
 {
   history -a # Add a previous command to bash_history
   CleanHistory
@@ -6,13 +6,13 @@ share_history()
   history -r # Reload history from bash_history
 }
 
-reload_history()
+ReloadHistory()
 {
   history -c
   history -r
 }
 
-control_history()
+ControlHistory()
 {
   local -r argc="$#"
   local -r status="$@"
@@ -25,9 +25,9 @@ control_history()
   fi
 
   case ${status} in
-    16) reload_history ;;
-    127) reload_history ;;
-    *) share_history ;;
+    16) ReloadHistory ;;
+    127) ReloadHistory ;;
+    *) ShareHistory ;;
   esac
   return 0
 }
