@@ -1,7 +1,7 @@
 ControlHistory()
 {
   local -r argc="$#"
-  local -r status="$@"
+  local -r status="$1"
   if ((argc == 0)); then
     echo "Missing args"
     return 1
