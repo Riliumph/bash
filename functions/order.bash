@@ -1,12 +1,13 @@
 asc_order()
 {
-  declare argv
+  local filepath="$1"
+  local lines
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-    mapfile -t argv < /dev/stdin
-  else
-    mapfile -t argv < "$1"
+    filepath="/dev/stdin"
   fi
+  # -t: remove LF
+  mapfile -t lines < "$filepath"
   # Check tool
   declare tool
   if type sort &> /dev/null; then
@@ -16,19 +17,19 @@ asc_order()
     exit 1
   fi
   # main process
-  printf "%s\n" "${argv[@]}" | eval "${tool}"
+  printf "%s\n" "${lines[@]}" | eval "${tool}"
 }
 
 reverse_order()
 {
-  declare argv
+  local filepath="$1"
+  local lines
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-    # -t: remove LF
-    mapfile -t argv < /dev/stdin
-  else
-    mapfile -t argv < "$1"
+    filepath="/dev/stdin"
   fi
+  # -t: remove LF
+  mapfile -t lines < "$filepath"
   # Check tool
   declare tool
   if type tac &> /dev/null; then
@@ -41,5 +42,5 @@ reverse_order()
   fi
   # main process
   # "\n": attach LF for reverse tool
-  printf "%s\n" "${argv[@]}" | eval "${tool}"
+  printf "%s\n" "${lines[@]}" | eval "${tool}"
 }

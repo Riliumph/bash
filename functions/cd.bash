@@ -28,8 +28,7 @@ custom_cd()
   # History Option
   if [[ "${destination}" == '-' ]]; then
     if which peco &> /dev/null; then
-      destination=$(\cat "${CD_HISTORY}" \
-        | reverse_order \
+      destination=$(reverse_order "${CD_HISTORY}" \
         | unique \
         | peco) # Cannot use --query option
     fi
