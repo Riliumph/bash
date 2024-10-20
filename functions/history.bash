@@ -40,7 +40,7 @@ CleanHistory()
   local -r OLD_IFS="${IFS}"
   IFS=$'\n' # support command history with half-width space
   # Read history file
-  mapfile -t uniq_ary < <(reverse_order "${HISTFILE}" | remove_trailingspace | unique | reverse_order)
+  mapfile -t uniq_ary < <(reverse_order "${HISTFILE}" | trim | unique | reverse_order)
   \cp "${HISTFILE}" "${HISTFILE}.bak" &> /dev/null
   echo "${uniq_ary[*]}" > ${HISTFILE}
   IFS="${OLD_IFS}"
