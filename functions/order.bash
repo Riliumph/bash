@@ -3,7 +3,7 @@ asc_order()
   declare argv
   # Check Pipeline
   if [ -p /dev/stdin ]; then
-    mapfile -t argv < <(cat -)
+    mapfile -t argv < /dev/stdin
   else
     mapfile -t argv < "$1"
   fi
@@ -25,7 +25,7 @@ reverse_order()
   # Check Pipeline
   if [ -p /dev/stdin ]; then
     # -t: remove LF
-    mapfile -t argv < <(cat -) # -: stdin
+    mapfile -t argv < /dev/stdin
   else
     mapfile -t argv < "$1"
   fi
