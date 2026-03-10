@@ -14,7 +14,7 @@ custom_cd()
   local -r argc="$#"
   case ${argc} in
     0)
-      if which peco &> /dev/null; then
+      if command -v peco &> /dev/null; then
         destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc | peco)
       fi
       ;;
@@ -27,7 +27,7 @@ custom_cd()
 
   # History Option
   if [[ "${destination}" == '-' ]]; then
-    if which peco &> /dev/null; then
+    if command -v peco &> /dev/null; then
       destination=$(reverse "${CD_HISTORY}" \
         | unique \
         | peco) # Cannot use --query option

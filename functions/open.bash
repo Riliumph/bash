@@ -1,4 +1,4 @@
-if ! type wslpath &> /dev/null; then
+if ! command -v wslpath &> /dev/null; then
   return
 fi
 

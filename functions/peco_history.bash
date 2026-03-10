@@ -23,6 +23,6 @@ PecoHistory()
   READLINE_POINT=${#CMD} # Set cursor
 }
 
-if which peco &> /dev/null; then
+if command -v peco &> /dev/null; then
   bind -x '"\C-r": PecoHistory'
 fi

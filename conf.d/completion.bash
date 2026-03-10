@@ -1,4 +1,4 @@
-if which git &> /dev/null; then
+if command -v git &> /dev/null; then
   case ${PF} in
     MacOS) source "/usr/local/opt/git/etc/bash_completion.d/git-completion.bash" ;;
     Linux) source "/etc/profile.d/bash_completion.sh" ;;

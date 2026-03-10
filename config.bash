@@ -34,7 +34,7 @@ source $BASH_ROOT/conf.d/history.bash
 # readline
 INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
 # LS_COLOR
-if type dircolors &> /dev/null; then
+if command -v dircolors &> /dev/null; then
   COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
   if [ -e "${COLORRC}" ]; then
     eval "$(dircolors "${COLORRC}")"

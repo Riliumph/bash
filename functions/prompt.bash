@@ -22,7 +22,7 @@ GetFaceStatus()
 PromptFactory()
 {
   local GIT_BRANCH=''
-  if type __git_ps1 &> /dev/null; then
+  if [[ "$(type -t __git_ps1 2> /dev/null)" == "function" ]]; then
     # __git_ps1 need executing when PS1 is interpreted.
     GIT_BRANCH='$(__git_ps1)'
   fi

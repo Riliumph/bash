@@ -1,6 +1,6 @@
 judge_os()
 {
-  if ! type uname &> /dev/null; then
+  if ! command -v uname &> /dev/null; then
     echo "not install uname"
     return 2
   fi

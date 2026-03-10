@@ -1,5 +1,5 @@
 ########## TERMINAL CODE ##########
-if which git &> /dev/null; then
+if command -v git &> /dev/null; then
   LoadGitFiles
   #export GIT_PS1_SHOWUPSTREAM=1
   export GIT_PS1_SHOWUNTRACKEDFILES=1
