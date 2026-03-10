@@ -15,7 +15,7 @@ PecoHistory()
     trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
   fi
   local -r CMD=$(\history \
-    | reverse_order \
+    | reverse \
     | eval "${trim_line_number}" \
     | unique \
     | peco --query "${READLINE_LINE}")
