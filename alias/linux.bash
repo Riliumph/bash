@@ -5,6 +5,9 @@ alias version='echo "bash versions: ${BASH_VERSION}"'
 # Reflect Root
 alias sudo='sudo '
 
+# cd
+alias cd='custom_cd'
+
 # File & Directory operation
 if which trash &> /dev/null; then
   alias rm='trash-put'

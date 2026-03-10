@@ -48,5 +48,3 @@ custom_cd()
   # Log path history and Convert relative path to absolute path
   pwd >> "${CD_HISTORY}"
 }
-
-alias cd='custom_cd'

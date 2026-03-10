@@ -2,6 +2,9 @@
 alias refresh='source $HOME/.bashrc && echo "Refresh Bash"'
 alias version='echo "bash versions: ${BASH_VERSION}"'
 
+# cd
+alias cd='custom_cd'
+
 # File & Directory operation
 if which rmtrash &> /dev/null; then
   alias rm='rmtrash'

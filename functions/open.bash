@@ -1,9 +1,9 @@
-###
-# open like mac
 if ! type wslpath &> /dev/null; then
   return
 fi
 
+###
+# open like mac
 open()
 {
   if [ $# != 1 ]; then
