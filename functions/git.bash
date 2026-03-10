@@ -1,8 +1,27 @@
 GIT_LOCAL="$BASH_ROOT/.local/git"
 GIT_FILE_LOCATION=(
+  # 共通
   "/usr/share"
-  "/usr/local/opt"
+  "/usr/local/share"
+  # Git の contrib
+  "/usr/share/git-core"
+  "/usr/share/git-core/contrib/completion"
+  # bash-completion の標準配置
   "/etc/bash_completion.d"
+  "/usr/share/bash-completion"
+  "/usr/share/bash-completion/completions"
+  # Homebrew (Intel / Apple Silicon)
+  "/usr/local/opt"
+  "/usr/local/share/git-core/contrib/completion"
+  "/opt/homebrew/opt"
+  "/opt/homebrew/share/git-core/contrib/completion"
+  "/opt/homebrew/etc/bash_completion.d"
+  # MacPorts
+  "/opt/local/share/git-core/contrib/completion"
+  "/opt/local/etc/bash_completion.d"
+  # Xcode / CLT（インストールしている場合）
+  "/Applications/Xcode.app/Contents/Developer/usr/share/git-core"
+  "/Library/Developer/CommandLineTools/usr/share/git-core"
 )
 
 # 共通：ファイル取得関数
