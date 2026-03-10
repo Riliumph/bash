@@ -43,7 +43,8 @@
 				"shardulm94.trailing-spaces",
 				"DavidAnson.vscode-markdownlint",
 				"IBM.output-colorizer",
-				"emilast.LogFileHighlighter"
+				"emilast.LogFileHighlighter",
+				"mkhl.shfmt"
 			]
 		}
 	}
