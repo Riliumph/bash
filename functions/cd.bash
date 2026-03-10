@@ -15,7 +15,7 @@ custom_cd()
   case ${argc} in
     0)
       if which peco &> /dev/null; then
-        destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
+        destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc | peco)
       fi
       ;;
     *) # Don't use "$@" to forget arguments' position info
