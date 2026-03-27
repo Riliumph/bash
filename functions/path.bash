@@ -4,7 +4,7 @@
 # Display path environment value human readably
 path()
 {
-  echo "${PATH}" | tr ":" "\\n"
+  printf '%s\n' "${PATH//:/\n}"
 }
 
 get_filename()
@@ -24,6 +24,8 @@ get_directory()
 
 path_unique()
 {
-  path=$(echo -n "${PATH}" | tr ":" "\\n" | unique | tr "\\n" ":")
-  echo "${path%:}" # remove last colon(:)
+  local path IFS=:
+  path=$(printf '%s\n' "${PATH//:/\n}" | unique)
+  printf '%s\n' "${path//$'\n'/:}"
 }
+
