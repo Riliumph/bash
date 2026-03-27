@@ -6,14 +6,18 @@
 # > https://wiki.archlinux.org/title/Bash/Prompt_customization
 GetFaceStatus()
 {
-  # If put escape sequence(\[,\]), display it
-  # If don't put escape sequence, appear new line problem in terminal
-  local -r success="(*'_')<" # \[$(tput setaf 2)\]"
-  local -r failure="(*;_;)<" # \[$(tput setaf 1)\]"
+  # Change to 1byte control data by ANSI-C Quoting
+  local green=$'\001\e[32m\002'
+  local red=$'\001\e[31m\002'
+  local reset=$'\001\e[0m\002'
+
+  local -r success="(*'_')<"
+  local -r failure="(*;_;)<"
+
   if [ "${LAST_STATUS}" -eq 0 ]; then
-    printf "%s %3d" "${success}" "${LAST_STATUS}"
+    printf "%s%s %3d%s" "$green" "$success" "$LAST_STATUS" "$reset"
   else
-    printf "%s %3d" "${failure}" "${LAST_STATUS}"
+    printf "%s%s %3d%s" "$red" "$failure" "$LAST_STATUS" "$reset"
   fi
 }
 
