@@ -8,15 +8,17 @@
 # 4.Pipe to peco
 PecoHistory()
 {
+  local sed_flag
   local trim_line_number
-  if [[ ${PF} == 'MacOS' ]]; then
-    trim_line_number='sed -Ee "s/^ +[0-9]+ +//"'
-  else
-    trim_line_number='sed -re "s/^\s+[0-9]+\s+//"'
-  fi
+
+  case "${PF}" in
+    MacOS) sed_flag='-E' ;;
+    *)     sed_flag='-r' ;;
+  esac
+  trim_line_number='s/^[[:space:]]*[0-9]+[[:space:]]+//'
   local -r CMD=$(\history \
     | reverse \
-    | eval "${trim_line_number}" \
+    | sed "${sed_flag}" "${trim_line_number}" \
     | unique \
     | peco --query "${READLINE_LINE}")
   READLINE_LINE=${CMD}   # Input to terminal's readline
