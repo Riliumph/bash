@@ -15,10 +15,6 @@ die() {
   exit 1
 }
 
-command_exists() {
-  command -v "$1" >/dev/null 2>&1
-}
-
 safe_source() {
   local file="$1"
   [[ -f "$file" ]] || die "File not found: $file"
