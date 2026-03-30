@@ -41,21 +41,12 @@ abs_dirname() {
 ################################################################################
 # Main
 ################################################################################
+
+info "install custom bash"
 # requirement
 [[ "${BASH_SOURCE[0]}" == "$0" ]] ||  die "This script must be executed, not sourced"
 
 SCRIPT_DIR="$(abs_dirname "$0")"
-
-# ---- load dependencies ----
-safe_source "$SCRIPT_DIR/conf.d/git.bash"
-safe_source "$SCRIPT_DIR/functions/git.bash"
-
-# ---- install ----
-info "installing git-prompt ..."
-InstallGitPrompt
-
-info "installing git-completion ..."
-InstallGitCompletion
 
 # ---- bashrc setup ----
 BASHRC="$HOME/.bashrc"
