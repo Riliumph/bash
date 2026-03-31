@@ -9,7 +9,7 @@ if [[ ! -v CACHE ]]; then
   CACHE="$XDG_CACHE_HOME/bash"
 fi
 
-# Check log directory existance
+# Check log directory existence
 if [[ ! -d CACHE ]]; then
   mkdir -p "${CACHE}"
 fi
@@ -21,7 +21,7 @@ if [[ ! -v CD_HISTORY ]]; then
   CD_HISTORY="$CACHE/cd_history.log"
 fi
 
-# Check log file existance
+# Check log file existence
 if [[ ! -f CD_HISTORY ]]; then
   touch "${CD_HISTORY}"
 fi

@@ -39,11 +39,11 @@ CleanHistory()
 {
   local -r OLD_IFS="${IFS}"
   IFS=$'\n' # support command history with half-width space
+  trap 'IFS=$OLD_IFS' RETURN
   # Read history file
-  mapfile -t uniq_ary < <(reverse_order "${HISTFILE}" | trim | unique | reverse_order)
+  mapfile -t uniq_ary < <(reverse "${HISTFILE}" | trim | unique | reverse)
   \cp "${HISTFILE}" "${HISTFILE}.bak" &> /dev/null
   echo "${uniq_ary[*]}" > "${HISTFILE}"
-  IFS="${OLD_IFS}"
 }
 
 ###
@@ -53,8 +53,9 @@ CleanCdHistory()
 {
   local -r OLD_IFS="${IFS}"
   IFS=$'\n' # support path with half-width space
+  trap 'IFS=$OLD_IFS' RETURN
   # Read history file
-  mapfile -t uniq_ary < <(reverse_order "${CD_HISTORY}" | unique | reverse_order)
+  mapfile -t uniq_ary < <(reverse "${CD_HISTORY}" | unique | reverse)
   \cp "${CD_HISTORY}" "${CD_HISTORY}.bak" &> /dev/null
   : > "${CD_HISTORY}" # truncate file
   for line in "${uniq_ary[@]}"; do
@@ -62,5 +63,4 @@ CleanCdHistory()
       echo "${line}" >> "${CD_HISTORY}"
     fi
   done
-  IFS="${OLD_IFS}"
 }

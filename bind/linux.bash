@@ -6,3 +6,8 @@ fi
 if type peco &> /dev/null; then
   bind '"\e[1;3B":"\ercd\n"'
 fi
+
+if command -v peco &> /dev/null; then
+  echo "bind peco_history"
+  bind -x '"\C-r": PecoHistory'
+fi
