@@ -1,35 +1,7 @@
-ControlHistory()
+SyncHistory()
 {
-  local -r argc="$#"
-  local -r status="$1"
-  if ((argc == 0)); then
-    echo "Missing args"
-    return 1
-  elif ((1 < argc)); then
-    echo "Excess args: ${argc}"
-    return 1
-  fi
-
-  case ${status} in
-    16) ReloadHistory ;;
-    127) ReloadHistory ;;
-    *) ShareHistory ;;
-  esac
-  return 0
-}
-
-ShareHistory()
-{
-  history -a # Add a previous command to bash_history
-  CleanHistory
-  history -c # Clear local history in terminal
-  history -r # Reload history from bash_history
-}
-
-ReloadHistory()
-{
-  history -c
-  history -r
+  history -a   # append commands from this session to the HISTFILE
+  history -n   # read commands added by other sessions from the HISTFILE
 }
 
 ###
