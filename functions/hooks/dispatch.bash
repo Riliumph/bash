@@ -5,5 +5,5 @@
 Dispatch()
 {
   export LAST_STATUS=$?
-  ControlHistory ${LAST_STATUS}
+  SyncHistory
 }
