@@ -8,6 +8,9 @@ remove_trailing_space()
   sed -e "s/\s*$//"
 }
 
+###
+# Trim leading and trailing whitespace from input lines.
+# Accepts argument or stdin.
 trim()
 {
   local argv=("$1")

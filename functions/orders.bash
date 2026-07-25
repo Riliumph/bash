@@ -1,6 +1,18 @@
 asc()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: asc [FILE]" \
+      "" \
+      "Sort lines alphabetically (case-insensitive)." \
+      "" \
+      "Arguments:" \
+      "  FILE    input file (default: stdin)"
+    return 0
+  fi
+
   local filepath="$1"
+
   # Check Pipeline
   if [ -p /dev/stdin ]; then
     filepath="/dev/stdin"
@@ -24,7 +36,17 @@ asc()
 
 reverse()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: asc [FILE]" \
+      "" \
+      "Sort input lines alphabetically." \
+      "If FILE is omitted, read from stdin."
+    return 0
+  fi
+
   local filepath="$1"
+
   # Check Pipeline
   if [ -p /dev/stdin ]; then
     filepath="/dev/stdin"

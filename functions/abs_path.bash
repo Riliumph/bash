@@ -4,6 +4,15 @@
 # @return absolute path
 abs_path()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: abs_path PATH" \
+      "" \
+      "Convert PATH to an absolute path." \
+      "Resolves directories and keeps the final filename component."
+    return 0
+  fi
+
   local target="$1"
 
   [ -n "$target" ] || return 1
