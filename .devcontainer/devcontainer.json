@@ -12,8 +12,12 @@
 		"--hostname",
 		"dev-container"
 	],
-	"workspaceFolder": "/workspace",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+	"mounts": [
+		"source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind"
+	],
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	// ${containerWorkspaceFolder}でworkspaceFolderを参照できるらしい。バグの可能性もあるので、workspaceFolderと同じ書式の方が良いかもしれない
+	"workspaceMount": "source=${localWorkspaceFolder},target=${containerWorkspaceFolder},type=bind",
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
@@ -30,21 +34,17 @@
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
-			"settings": {
-				"terminal.integrated.shell.linux": "/bin/bash"
-			},
 			"extensions": [
 				"ms-azuretools.vscode-docker",
 				"exiasr.hadolint",
 				"DavidAnson.vscode-markdownlint",
-				"timonwong.shellcheck",
-				"foxundermoon.shell-format",
 				"streetsidesoftware.code-spell-checker",
+				"EditorConfig.EditorConfig", // read editoconfig for shell
+				"timonwong.shellcheck", // automatically exe shellcheck
+				"mkhl.shfmt", // automatically exe shfmt
 				"shardulm94.trailing-spaces",
-				"DavidAnson.vscode-markdownlint",
 				"IBM.output-colorizer",
-				"emilast.LogFileHighlighter",
-				"mkhl.shfmt"
+				"emilast.LogFileHighlighter"
 			]
 		}
 	}
