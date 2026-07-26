@@ -1,5 +1,8 @@
-
-judge_os() {
+###
+# Detect current operating system environment.
+# Output: macOS / WSL / Linux / Cygwin / MSYS/GitBash / UNKNOWN
+judge_os()
+{
   local kernel_name
 
   kernel_name="$(uname -s)"
@@ -9,7 +12,7 @@ judge_os() {
       echo "macOS"
       ;;
     Linux)
-      if grep -qi microsoft /proc/version 2>/dev/null; then
+      if grep -qi microsoft /proc/version 2> /dev/null; then
         echo "WSL"
       else
         echo "Linux"
@@ -18,7 +21,7 @@ judge_os() {
     CYGWIN*)
       echo "Cygwin"
       ;;
-    MINGW*|MSYS*)
+    MINGW* | MSYS*)
       echo "MSYS/GitBash"
       ;;
     *)
@@ -28,7 +31,6 @@ judge_os() {
   esac
   return 0
 }
-
 
 IsAvailable()
 {

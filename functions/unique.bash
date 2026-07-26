@@ -1,5 +1,17 @@
 unique()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: unique [FILE]" \
+      "" \
+      "Remove duplicate lines while preserving order." \
+      "" \
+      "Input:" \
+      "  FILE    Read from file." \
+      "  stdin   Read from standard input."
+    return 0
+  fi
+
   local filepath="$1"
   # Check Pipeline
   if [ -p /dev/stdin ]; then

@@ -8,6 +8,5 @@ if type peco &> /dev/null; then
 fi
 
 if command -v peco &> /dev/null; then
-  echo "bind peco_history"
   bind -x '"\C-r": FuzzyHistory'
 fi

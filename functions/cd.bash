@@ -11,6 +11,21 @@
 #    Show path-history you have moved by peco
 custom_cd()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: custom_cd [PATH|-]" \
+      "" \
+      "Change directory with additional helpers." \
+      "" \
+      "Arguments:" \
+      "  PATH    Change to specified directory." \
+      "  -       Select directory from cd history using peco." \
+      "" \
+      "No argument:" \
+      "  Select a child directory from current directory using peco."
+    return 0
+  fi
+
   local -r argc="$#"
   case ${argc} in
     0)
