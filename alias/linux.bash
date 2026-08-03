@@ -5,8 +5,11 @@ alias version='echo "bash versions: ${BASH_VERSION}"'
 # Reflect Root
 alias sudo='sudo '
 
+# cd
+alias cd='custom_cd'
+
 # File & Directory operation
-if which trash &> /dev/null; then
+if command -v trash &> /dev/null; then
   alias rm='trash-put'
 else
   alias rm='rm -Iv --one-file-system'
@@ -33,7 +36,7 @@ else
 fi
 
 # Show command
-if which htop &> /dev/null; then
+if command -v htop &> /dev/null; then
   alias top='htop'
 fi
 

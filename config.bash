@@ -3,7 +3,8 @@
 # export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME:+$FUNCNAME(): }'
 
 ### Check Requirement
-if ! source "$BASH_ROOT/conf.d/require.bash"; then
+BASH_CONFD="$BASH_ROOT/conf.d"
+if ! source "$BASH_CONFD/require.bash"; then
   return 1
 fi
 
@@ -21,21 +22,21 @@ fi
 
 ### Config
 # bash
-source $BASH_ROOT/conf.d/shelloption.bash
-source $BASH_ROOT/conf.d/stty.bash
-source $BASH_ROOT/conf.d/completion.bash
-source $BASH_ROOT/conf.d/global.bash
-source $BASH_ROOT/conf.d/lang.bash
-source $BASH_ROOT/conf.d/path.bash
-source $BASH_ROOT/conf.d/git.bash
-source $BASH_ROOT/conf.d/prompt.bash
-source $BASH_ROOT/conf.d/cache.bash
-source $BASH_ROOT/conf.d/history.bash
+source "$BASH_CONFD/shelloption.bash"
+source "$BASH_CONFD/stty.bash"
+source "$BASH_CONFD/completion.bash"
+source "$BASH_CONFD/global.bash"
+source "$BASH_CONFD/lang.bash"
+source "$BASH_CONFD/path.bash"
+source "$BASH_CONFD/git.bash"
+source "$BASH_CONFD/prompt.bash"
+source "$BASH_CONFD/cache.bash"
+source "$BASH_CONFD/history.bash"
 # readline
 INPUTRC="$BASH_ROOT/readline/${PF,,}.inputrc"
 # LS_COLOR
-if type dircolors &> /dev/null; then
-  COLORRC="$BASH_ROOT/conf.d/${PF,,}.colorrc"
+if command -v dircolors &> /dev/null; then
+  COLORRC="$BASH_CONFD/${PF,,}.colorrc"
   if [ -e "${COLORRC}" ]; then
     eval "$(dircolors "${COLORRC}")"
   fi

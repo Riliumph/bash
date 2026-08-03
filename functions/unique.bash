@@ -1,16 +1,33 @@
 unique()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: unique [FILE]" \
+      "" \
+      "Remove duplicate lines while preserving order." \
+      "" \
+      "Input:" \
+      "  FILE    Read from file." \
+      "  stdin   Read from standard input."
+    return 0
+  fi
+
   local filepath="$1"
-  local lines
   # Check Pipeline
   if [ -p /dev/stdin ]; then
+    # e.g. echo xxx | unique
     filepath="/dev/stdin"
   fi
-  # -t: remove LF
-  mapfile -t lines < "$filepath"
-  # main process
-  # Attention to how to escape single-quotation
-  uniq='awk '\''!dictionary[$0]++'\'
+
+  if [ -z "$filepath" ]; then
+    # e.g. unique / unique < xxx.txt
+    if [ -t 0 ]; then
+      # Attention: awk keeps reading input until it reaches EOF (stdin is closed).
+      echo "unique: waiting your input... exit: Ctrl-D" >&2
+    fi
+    filepath="/dev/stdin"
+  fi
+  local -r AWK_DEDUP='!dictionary[$0]++'
   # Need not sort -f unlike uniq command
-  printf "%s\n" "${lines[@]}" | eval "${uniq}"
+  awk "$AWK_DEDUP" "$filepath"
 }

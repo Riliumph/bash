@@ -2,19 +2,31 @@
 # Convert to absolute path
 # @param $1 path
 # @return absolute path
-abs_dirname()
+abs_path()
 {
-  local path="$1"
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: abs_path PATH" \
+      "" \
+      "Convert PATH to an absolute path." \
+      "Resolves directories and keeps the final filename component."
+    return 0
+  fi
 
-  # Check path existence one by one
-  while [ -n "$path" ]; do
-    # Remove the shortest pattern(/*) from right
-    builtin cd "${path%/*}" || exit
-    # Remove the longest pattern(*/) from left
-    local name="${path##*/}"
-    path="$(readlink "$name" || true)"
-    echo "path: $path"
-  done
+  local target="$1"
 
-  pwd -P # return string
+  [ -n "$target" ] || return 1
+
+  ( # Use a subshell to avoid changing the caller's working directory
+    if [ -d "$target" ]; then
+      cd -P -- "$target" && pwd
+    else
+      local dir base
+      dir=$(dirname -- "$target") || exit 1
+      base=$(basename -- "$target") || exit 1
+
+      cd -P -- "$dir" || exit 1
+      printf '%s/%s\n' "$(pwd)" "$base"
+    fi
+  )
 }

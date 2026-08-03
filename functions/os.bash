@@ -1,22 +1,34 @@
+###
+# Detect current operating system environment.
+# Output: macOS / WSL / Linux / Cygwin / MSYS/GitBash / UNKNOWN
 judge_os()
 {
-  if ! type uname &> /dev/null; then
-    echo "not install uname"
-    return 2
-  fi
+  local kernel_name
 
-  if [[ "$(uname)" == 'Darwin' ]]; then
-    echo 'MacOS'
-  elif [[ "$(uname -r)" == *microsoft* ]]; then
-    echo 'WSL'
-  elif [[ "$(uname)" == *MINGW64_NT* ]]; then
-    echo 'Cygwin'
-  elif [[ "$(uname -s | cut -c1-5)" == 'Linux' ]]; then
-    echo 'Linux'
-  else
-    echo 'UNKNOWN'
-    return 1
-  fi
+  kernel_name="$(uname -s)"
+
+  case "$kernel_name" in
+    Darwin)
+      echo "macOS"
+      ;;
+    Linux)
+      if grep -qi microsoft /proc/version 2> /dev/null; then
+        echo "WSL"
+      else
+        echo "Linux"
+      fi
+      ;;
+    CYGWIN*)
+      echo "Cygwin"
+      ;;
+    MINGW* | MSYS*)
+      echo "MSYS/GitBash"
+      ;;
+    *)
+      echo "UNKNOWN"
+      return 1
+      ;;
+  esac
   return 0
 }
 

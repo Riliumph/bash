@@ -11,11 +11,26 @@
 #    Show path-history you have moved by peco
 custom_cd()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: custom_cd [PATH|-]" \
+      "" \
+      "Change directory with additional helpers." \
+      "" \
+      "Arguments:" \
+      "  PATH    Change to specified directory." \
+      "  -       Select directory from cd history using peco." \
+      "" \
+      "No argument:" \
+      "  Select a child directory from current directory using peco."
+    return 0
+  fi
+
   local -r argc="$#"
   case ${argc} in
     0)
-      if which peco &> /dev/null; then
-        destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc_order | peco)
+      if command -v peco &> /dev/null; then
+        destination=$(find ./ -maxdepth 1 -mindepth 1 -type d | asc | peco)
       fi
       ;;
     *) # Don't use "$@" to forget arguments' position info
@@ -27,8 +42,8 @@ custom_cd()
 
   # History Option
   if [[ "${destination}" == '-' ]]; then
-    if which peco &> /dev/null; then
-      destination=$(reverse_order "${CD_HISTORY}" \
+    if command -v peco &> /dev/null; then
+      destination=$(reverse "${CD_HISTORY}" \
         | unique \
         | peco) # Cannot use --query option
     fi
@@ -48,5 +63,3 @@ custom_cd()
   # Log path history and Convert relative path to absolute path
   pwd >> "${CD_HISTORY}"
 }
-
-alias cd='custom_cd'

@@ -3,11 +3,14 @@ replace()
   sed -e "s/$1/$2/g"
 }
 
-remove_trailingspace()
+remove_trailing_space()
 {
   sed -e "s/\s*$//"
 }
 
+###
+# Trim leading and trailing whitespace from input lines.
+# Accepts argument or stdin.
 trim()
 {
   local argv=("$1")
@@ -17,7 +20,7 @@ trim()
 
   for line in "${argv[@]}"; do
     line="${line##+([[:space:]])}" # trim preceding
-    line="${line%%+([[:space:]])}" # trim trailling
+    line="${line%%+([[:space:]])}" # trim trailing
     echo "$line"
   done
 }

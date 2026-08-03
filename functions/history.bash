@@ -1,35 +1,7 @@
-ControlHistory()
+SyncHistory()
 {
-  local -r argc="$#"
-  local -r status="$1"
-  if ((argc == 0)); then
-    echo "Missing args"
-    return 1
-  elif ((1 < argc)); then
-    echo "Excess args: ${argc}"
-    return 1
-  fi
-
-  case ${status} in
-    16) ReloadHistory ;;
-    127) ReloadHistory ;;
-    *) ShareHistory ;;
-  esac
-  return 0
-}
-
-ShareHistory()
-{
-  history -a # Add a previous command to bash_history
-  CleanHistory
-  history -c # Clear local history in terminal
-  history -r # Reload history from bash_history
-}
-
-ReloadHistory()
-{
-  history -c
-  history -r
+  history -a # append commands from this session to the HISTFILE
+  history -n # read commands added by other sessions from the HISTFILE
 }
 
 ###
@@ -37,13 +9,25 @@ ReloadHistory()
 # Clean bash's command history
 CleanHistory()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: CleanHistory" \
+      "" \
+      "Clean bash command history." \
+      "" \
+      "Actions:" \
+      "  - Remove duplicated and empty history entries." \
+      "  - Create backup file: \${HISTFILE}.bak"
+    return 0
+  fi
+
   local -r OLD_IFS="${IFS}"
   IFS=$'\n' # support command history with half-width space
+  trap 'IFS=$OLD_IFS' RETURN
   # Read history file
-  mapfile -t uniq_ary < <(reverse_order "${HISTFILE}" | trim | unique | reverse_order)
+  mapfile -t uniq_ary < <(reverse "${HISTFILE}" | trim | unique | reverse)
   \cp "${HISTFILE}" "${HISTFILE}.bak" &> /dev/null
   echo "${uniq_ary[*]}" > "${HISTFILE}"
-  IFS="${OLD_IFS}"
 }
 
 ###
@@ -51,10 +35,24 @@ CleanHistory()
 # Clean cd's history
 CleanCdHistory()
 {
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    printf '%s\n' \
+      "Usage: CleanCdHistory" \
+      "" \
+      "Clean cd history." \
+      "" \
+      "Actions:" \
+      "  - Remove duplicated paths." \
+      "  - Remove paths that no longer exist." \
+      "  - Create backup file: \${CD_HISTORY}.bak"
+    return 0
+  fi
+
   local -r OLD_IFS="${IFS}"
   IFS=$'\n' # support path with half-width space
+  trap 'IFS=$OLD_IFS' RETURN
   # Read history file
-  mapfile -t uniq_ary < <(reverse_order "${CD_HISTORY}" | unique | reverse_order)
+  mapfile -t uniq_ary < <(reverse "${CD_HISTORY}" | unique | reverse)
   \cp "${CD_HISTORY}" "${CD_HISTORY}.bak" &> /dev/null
   : > "${CD_HISTORY}" # truncate file
   for line in "${uniq_ary[@]}"; do
@@ -62,5 +60,4 @@ CleanCdHistory()
       echo "${line}" >> "${CD_HISTORY}"
     fi
   done
-  IFS="${OLD_IFS}"
 }

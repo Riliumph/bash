@@ -5,4 +5,5 @@ fi
 
 if type peco &> /dev/null; then
   bind '"\e[1;3B":"\ercd\n"'
+  bind -x '"\C-r": FuzzyHistory'
 fi
