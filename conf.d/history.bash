@@ -1,5 +1,4 @@
 shopt -u histappend # disable auto save when session finalize
-export HISTFILE="$CACHE/.bash_history"
 export HISTCONTROL=ignoreboth:erasedups
 ### Ignore commands
 # command name with 3 or fewer characters
