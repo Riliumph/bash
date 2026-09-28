@@ -1,19 +1,21 @@
 docker-rmi()
 {
   while true; do
-    image=$(
+    images=$(
       docker images --format 'table {{.Repository}}\t{{.Tag}}\t{{.ID}}\t{{.Size}}' \
         | peco
     )
 
-    [ -z "$image" ] && break
+    [ -z "$images" ] && break
 
-    id=$(awk '{print $3}' <<< "$image")
+    while IFS= read -r image; do
+      id=$(awk '{print $3}' <<< "$image")
 
-    # ヘッダ行なら再選択
-    [ "$id" = "IMAGE" ] && continue
+      # ヘッダ行ならスキップ
+      [ "$id" = "IMAGE" ] && continue
 
-    docker rmi "$id" || break
+      docker rmi "$id" || break
+    done <<< "$images"
   done
 }
 
