@@ -20,26 +20,30 @@ docker-rmi()
 docker-rm()
 {
   while true; do
-    container=$(docker ps -a --format '{{.Names}}\t{{.Image}}\t{{.Status}}' | peco)
+    container=$(
+      docker ps -a --format 'table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}' \
+        | peco
+    )
 
     [ -z "$container" ] && break
 
-    name=$(echo "$container" | awk '{print $1}')
+    id=$(awk '{print $1}' <<< "$container")
 
-    running=$(docker inspect -f '{{.State.Running}}' "$name")
+    # ヘッダ行
+    [ "$id" = "CONTAINER" ] && continue
+
+    running=$(docker inspect -f '{{.State.Running}}' "$id")
 
     if [ "$running" = "true" ]; then
-      printf "Container '%s' is running. Remove it? [y/N] " "$name"
+      printf "Container '%s' is running. Remove it? [y/N] " "$id"
       read -r answer
 
       case "$answer" in
         y | Y | yes | YES) ;;
-        *)
-          continue
-          ;;
+        *) continue ;;
       esac
     fi
 
-    docker rm "$name" || break
+    docker rm "$id" || break
   done
 }
