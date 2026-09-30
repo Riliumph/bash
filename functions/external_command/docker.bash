@@ -39,9 +39,15 @@ docker-rm()
 
       if [ "$running" = "true" ]; then
         printf "Container '%s' is running. Remove it? [y/N] " "$id"
-        read -r answer
+        ## Explicitly read from the controlling TTY.
+        # Without /dev/tty, read consumes the here-string input (<<< "$containers")
+        # instead of waiting for user input.
+        read -r answer < /dev/tty
         case "$answer" in
-          y | Y | yes | YES) ;;
+          y | Y | yes | YES)
+            docker rm -f "$id" || break
+            continue
+            ;;
           *) continue ;;
         esac
       fi
