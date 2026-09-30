@@ -44,7 +44,10 @@ docker-rm()
         # instead of waiting for user input.
         read -r answer < /dev/tty
         case "$answer" in
-          y | Y | yes | YES) ;;
+          y | Y | yes | YES)
+            docker rm -f "$id" || break
+            continue
+            ;;
           *) continue ;;
         esac
       fi
