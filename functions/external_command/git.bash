@@ -59,7 +59,7 @@ git-stat-by-authors()
 
 git-stat-files()
 {
-  local limit="${1:-20}"
+  local limit="${1:-$1}"
   local rows
 
   rows=$(
