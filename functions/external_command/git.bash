@@ -21,3 +21,32 @@ git-stat-summary()
     echo -e "Deleted\t$deleted"
   ) | column -t -s $'\t'
 }
+
+git-stat-by-authors()
+{
+  local rows=""
+  local author
+  local commits
+  local added
+  local deleted
+
+  while read -r author; do
+    commits=$(git rev-list --count --all --author="$author")
+
+    added=0
+    deleted=0
+
+    while read -r add del _; do
+      [[ -z "$add" || -z "$del" ]] && continue
+      ((added += add))
+      ((deleted += del))
+    done < <(git log --author="$author" --numstat --format="")
+
+    rows+="${author}\t${commits}\t${added}\t${deleted}"$'\n'
+  done < <(git shortlog -s -n --all | sed 's/^[[:space:]]*[0-9]*[[:space:]]*//')
+
+  (
+    echo -e "Author\tCommits\tAdded\tDeleted"
+    echo -e "$rows"
+  ) | column -t -s $'\t'
+}
