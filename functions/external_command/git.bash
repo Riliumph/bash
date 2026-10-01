@@ -50,3 +50,29 @@ git-stat-by-authors()
     echo -e "$rows"
   ) | column -t -s $'\t'
 }
+
+git-stat-files()
+{
+  local limit="${1:-20}"
+  local rows
+
+  rows=$(
+    git log --numstat --format="" \
+      | awk '
+          NF==3 {
+            files[$3] += $1 + $2
+          }
+          END {
+            for (f in files)
+              print files[f] "\t" f
+          }
+        ' \
+      | sort -nr \
+      | head -n "$limit"
+  )
+
+  (
+    echo -e "Changes\tFile"
+    echo "$rows"
+  ) | column -t -s $'\t'
+}
