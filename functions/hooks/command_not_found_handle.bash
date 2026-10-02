@@ -1,6 +1,7 @@
 command_not_found_handle()
 {
-  # Do not keep failed commands in history.
+  # history -d is ineffective here; Bash restores the entry afterwards.
+  # Mark it via an environment variable and remove it later.
   history -d $((HISTCMD - 1)) 2> /dev/null
   # ubuntu 24.04 default
   if [ -x /usr/lib/command-not-found ]; then
