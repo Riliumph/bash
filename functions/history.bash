@@ -1,5 +1,8 @@
 SyncHistory()
 {
+  if ((LAST_STATUS == 127)); then
+    history -d $((HISTCMD - 1))
+  fi
   history -a # append commands from this session to the HISTFILE
   history -n # read commands added by other sessions from the HISTFILE
 }
