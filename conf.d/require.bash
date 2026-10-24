@@ -1,6 +1,6 @@
-# Reuire: Use stdout(FD 1)
-if [[ ! -t 1 ]]; then
-  echo "Cannot use stdout(fd 1)"
+# Require: interactive mode
+if [[ $- != *i* ]]; then
+  echo "Not running in interactive mode"
   # Do not exe to avoid following error in scp
   # bind: warning: line editing not enabled
   return 1

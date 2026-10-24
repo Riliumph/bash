@@ -6,7 +6,7 @@ if command -v git &> /dev/null; then
   export GIT_PS1_SHOWDIRTYSTATE=1
 fi
 
-# Enclose in single quotes for dynamic operation
+# Register the function name intentionally so the prompt can change dynamically each time.
 export PROMPT_COMMAND='Dispatch'
 # Enclose in double quotes for static operation
 SetPrompt

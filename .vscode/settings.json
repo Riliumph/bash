@@ -11,5 +11,12 @@
   "shellformat.useEditorConfig": true,
   "shellformat.effectLanguages": [
     "shellscript"
+  ],
+  "cSpell.words": [
+    "COLORRC",
+    "CONFD",
+    "dircolors",
+    "shelloption",
+    "stty"
   ]
 }
