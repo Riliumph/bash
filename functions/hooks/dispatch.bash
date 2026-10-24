@@ -6,5 +6,8 @@ Dispatch()
 {
   # Preserve previous command status before running prompt hooks.
   export LAST_STATUS=$?
+  if ((LAST_STATUS == 127)); then
+    history -d $((HISTCMD - 1))
+  fi
   SyncHistory
 }

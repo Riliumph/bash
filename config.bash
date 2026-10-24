@@ -9,6 +9,7 @@ if ! source "$BASH_CONFD/require.bash"; then
 fi
 
 ### Function definition
+# Load every function file dynamically so new files under functions/ are picked up automatically.
 # Don't execute function yet
 mapfile -d $'\0' func_definitions < <(find "$BASH_ROOT/functions" -name "*.bash" -type f -print0)
 for func_definition in "${func_definitions[@]}"; do

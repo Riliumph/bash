@@ -1,12 +1,9 @@
-# Attention: No need bind's option "-x"
-if [[ ${PS1} ]]; then
-  bind '"\e[1;3A":"\e[3;5~\ercd ../\n"'
-fi
+[[ $- == *i* ]] || return
 
-if type peco &> /dev/null; then
-  bind '"\e[1;3B":"\ercd\n"'
-fi
+# Attention: No need bind's option "-x"
+bind '"\e[1;3A":"\e[3;5~\ercd ../\n"'
 
 if command -v peco &> /dev/null; then
+  bind '"\e[1;3B":"\ercd\n"'
   bind -x '"\C-r": FuzzyHistory'
 fi
